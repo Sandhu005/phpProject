@@ -1,6 +1,7 @@
 <?php
 include("header.php");
 ?>
+
   <main class="main">
 
     <!-- Hero Section -->
@@ -923,6 +924,7 @@ include("header.php");
     </section><!-- /Events Section -->
 
   </main>
+
 <?php
 include("footer.php");
 ?>
