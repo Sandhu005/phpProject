@@ -75,19 +75,30 @@ include("config.php");
 <?php
 
 if (isset($_POST['addBtn'])) {
-    $name = $_POST['name'];
+    $cat_id = $_POST['cat_id'];
+    $title = $_POST['title'];
+    $brand = $_POST['brand'];
+    $model = $_POST['model'];
+    $price_per_day = $_POST['price_per_day'];
     $description = $_POST['description'];
 
-    $query = "INSERT INTO `catagories`(`name`, `description`) VALUES ('$name', '$description')";
+    $img = $_FILES['img'];
+    $imgTmp = $img['tmp_name'];
+    $imgName = $img['name'];
+    $image_url = rand()."-".$imgName;
+
+
+    $query = "INSERT INTO `cars`(`cat_id`, `title`, `brand`, `model`, `price_per_day`, `image_url`, `description`) VALUES ('$cat_id', '$title', '$brand', '$model', '$price_per_day', '$image_url', '$description')";
     $result = mysqli_query($conn, $query);
 
     if ($result == 1) {
         echo '<div class="alert alert-success" role="alert">
-                Catagory Added Successfully!
+                Car Added Successfully!
             </div>';
+            move_uploaded_file("$imgTmp", "img/".$image_url);
     } else {
         echo '<div class="alert alert-danger" role="alert">
-                Failed to Add Catagory!
+                Failed to Add Car!
             </div>';
     }
 mysqli_close($conn);
