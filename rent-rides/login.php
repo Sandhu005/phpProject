@@ -33,7 +33,9 @@ include("header.php");
 <?php
 
 if(isset($_GET['msg'])){
-    echo $_GET['msg'];
+    echo '<div class="alert alert-danger" role="alert">
+            '.$_GET['msg'].'
+        </div>';
 }
 
 include("footer.php");
