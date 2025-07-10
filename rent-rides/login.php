@@ -1,6 +1,16 @@
+<!-- Header -->
 <?php
 include("header.php");
+
+if(isset($_GET['msg'])){
+    echo '<div class="alert alert-success" role="alert">
+            '.$_GET['msg'].'
+        </div>';
+}
+
 ?>
+
+<!-- Login Form -->
 <div class="container-fluid py-5">
     <div class="row justify-content-center">
         <div class="col-xl-6 wow fadeInUp" data-wow-delay="0.1s">
@@ -30,13 +40,8 @@ include("header.php");
         </div>
     </div>
 </div>
+
+<!-- Footer -->
 <?php
-
-if(isset($_GET['msg'])){
-    echo '<div class="alert alert-danger" role="alert">
-            '.$_GET['msg'].'
-        </div>';
-}
-
 include("footer.php");
 ?>

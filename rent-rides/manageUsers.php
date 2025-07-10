@@ -20,30 +20,30 @@ if(isset($_GET['msg'])){
                 <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Title</th>
-                        <th scope="col">Brand</th>
-                        <th scope="col">Model</th>
-                        <th scope="col">Price/Day</th>
-                        <th scope="col">Image</th>
-                        <th scope="col">Despription</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Password</th>
+                        <th scope="col">Contact</th>
+                        <th scope="col">Address</th>
+                        <th scope="col">Status</th>
                         <th scope="col">Manage</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php
-                    $data = mysqli_query($conn, "SELECT * FROM `cars`");
+                    $data = mysqli_query($conn, "SELECT * FROM `users`");
                     $num = 1;
                     while($row=mysqli_fetch_assoc($data)){
                         ?>
                     <tr>
                         <td scope="row"><?php echo $num; ?></td>
-                        <td><?php echo $row['title']; ?></td>
-                        <td><?php echo $row['brand']; ?></td>
-                        <td><?php echo $row['model']; ?></td>
-                        <td><?php echo "$".$row['price_per_day']; ?></td>
-                        <td><?php echo $row['image_url']; ?></td>
-                        <td><?php echo $row['description']; ?></td>
-                        <td><a href="editCar.php?id=<?php echo $row['id']; ?>">Edit</a> | <a href="deleteCar.php?id=<?php echo $row['id']; ?>">Delete</a></td>
+                        <td><?php echo $row['name']; ?></td>
+                        <td><?php echo $row['email']; ?></td>
+                        <td><?php echo $row['password']; ?></td>
+                        <td><?php echo "$".$row['contact']; ?></td>
+                        <td><?php echo $row['address']; ?></td>
+                        <td><?php echo $row['status']; ?></td>
+                        <td><a href="editUser.php?id=<?php echo $row['id']; ?>">Edit</a> | <a href="deleteUser.php?id=<?php echo $row['id']; ?>">Delete</a></td>
                     </tr>
                     <?php
                     $num++;

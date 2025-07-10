@@ -2,7 +2,7 @@
 include("adminHeader.php");
 ?>
 <div class="container-fluid">
-    <!-- Cards Row-1 -->
+    <!-- Cards Row-1 -->    
     <div class="row justify-content-evenly my-5">
         <div class="col-lg-2 card">
             <img src="..." class="card-img-top" alt="...">

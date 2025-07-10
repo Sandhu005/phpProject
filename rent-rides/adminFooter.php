@@ -13,24 +13,24 @@
           <div class="col-md-6 col-lg-6 col-xl-3">
               <div class="footer-item d-flex flex-column">
                   <h4 class="text-white mb-4">Quick Links</h4>
-                  <a href="#"><i class="fas fa-angle-right me-2"></i> Catagory</a>
-                  <a href="#"><i class="fas fa-angle-right me-2"></i> Users</a>
-                  <a href="#"><i class="fas fa-angle-right me-2"></i> Feedbacks</a>
+                  <a href="addCatagory.php"><i class="fas fa-angle-right me-2"></i> Catagory</a>
+                  <a href="manageUsers.php"><i class="fas fa-angle-right me-2"></i> Users</a>
+                  <a href="manageFeedbacks.php"><i class="fas fa-angle-right me-2"></i> Feedbacks</a>
               </div>
           </div>
           <div class="col-md-6 col-lg-6 col-xl-3">
               <div class="footer-item d-flex flex-column">
                   <h4 class="text-white mb-4">Manage Cars</h4>
-                  <a href="#"><i class="fas fa-angle-right me-2"></i> View Cars</a>
-                  <a href="#"><i class="fas fa-angle-right me-2"></i> Add Cars</a>
-                  <a href="#"><i class="fas fa-angle-right me-2"></i> Edit Cars</a>
+                  <a href="manageCars.php"><i class="fas fa-angle-right me-2"></i> View Cars</a>
+                  <a href="addCars.php"><i class="fas fa-angle-right me-2"></i> Add Cars</a>
+                  <a href="manageCars.php"><i class="fas fa-angle-right me-2"></i> Edit Cars</a>
               </div>
           </div>
           <div class="col-md-6 col-lg-6 col-xl-3">
               <div class="footer-item d-flex flex-column">
                   <h4 class="text-white mb-4">Bookings</h4>
-                  <a href="#"><i class="fas fa-angle-right me-2"></i> View Bookings</a>
-                  <a href="#"><i class="fas fa-angle-right me-2"></i> Manage Bookings</a>
+                  <a href="manageBookings.php"><i class="fas fa-angle-right me-2"></i> View Bookings</a>
+                  <a href="manageBookings.php"><i class="fas fa-angle-right me-2"></i> Manage Bookings</a>
               </div>
           </div>
       </div>

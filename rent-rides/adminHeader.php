@@ -52,7 +52,7 @@
                     <div class="collapse navbar-collapse" id="navbarCollapse">
                         <div class="navbar-nav mx-auto py-0">
                             <a href="adminIndex.php" class="nav-item nav-link active">Dashboard</a>
-                            <a href="manageCatagory.php" class="nav-item nav-link">Catagory</a>
+                            <a href="addCatagory.php" class="nav-item nav-link">Catagory</a>
                             <a href="manageUsers.php" class="nav-item nav-link">Users</a>
 
                             <div class="nav-item dropdown">
@@ -66,7 +66,7 @@
                             <div class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Bookings</a>
                                 <div class="dropdown-menu m-0">
-                                    <a href="viewBookings.php" class="dropdown-item">View Bookings</a>
+                                    <a href="manageBookings.php" class="dropdown-item">View Bookings</a>
                                     <a href="manageBookings.php" class="dropdown-item">Manage Bookings</a>
                                 </div>
                             </div>
