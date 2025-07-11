@@ -50,9 +50,8 @@ $d = mysqli_fetch_assoc($r);
                          <div class="col-lg-12 col-xl-12">
                             <div class="form-floating">
                                 <select name="status" id="" class="form-control" required>
-                                    <option value="" selected disabled>Select Status</option>
-                                    <option value="">Active</option>
-                                    <option value="">Inactive</option>
+                                    <option value="active">active</option>
+                                    <option value="inactive">inactive</option>
                                 </select>
                             </div>
                         </div>

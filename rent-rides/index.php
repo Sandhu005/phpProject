@@ -1,6 +1,8 @@
+ <!-- Header -->
  <?php
     include("header.php");
     ?>
+
  <!-- Carousel Start -->
  <div class="header-carousel">
      <div id="carouselId" class="carousel slide" data-bs-ride="carousel" data-bs-interval="false">
@@ -932,6 +934,7 @@
  </div>
  <!-- Testimonial End -->
 
+ <!-- Footer -->
  <?php
     include("footer.php");
     ?>

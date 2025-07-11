@@ -40,7 +40,7 @@ if(isset($_GET['msg'])){
                         <td><?php echo $row['name']; ?></td>
                         <td><?php echo $row['email']; ?></td>
                         <td><?php echo $row['password']; ?></td>
-                        <td><?php echo "$".$row['contact']; ?></td>
+                        <td><?php echo $row['contact']; ?></td>
                         <td><?php echo $row['address']; ?></td>
                         <td><?php echo $row['status']; ?></td>
                         <td><a href="editUser.php?id=<?php echo $row['id']; ?>">Edit</a> | <a href="deleteUser.php?id=<?php echo $row['id']; ?>">Delete</a></td>

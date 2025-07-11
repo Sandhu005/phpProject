@@ -93,7 +93,14 @@
                             </div>
                             <a href="contact.php" class="nav-item nav-link">Contact</a>
                         </div>
-                        <a href="login.php" class="btn btn-primary rounded-pill py-2 px-4">Login Here</a>
+                        <?php
+                            if(isset($_GET['name'])){ 
+                                echo '<a href="index.php" class="btn btn-primary rounded-pill py-2 px-4">Logout</a>';
+                                echo "<div class='ms-2'>Welcome ".$_GET['name']."!</div>";
+                            }else{
+                                echo '<a href="login.php" class="btn btn-primary rounded-pill py-2 px-4">Login Here</a>';
+                            }
+                        ?>
                     </div>
                 </nav>
             </div>

@@ -68,7 +68,7 @@ if (isset($_POST['addBtn'])) {
 
     if ($result == 1) {
         echo '<script>
-                    window.location.assign("login.php?msg=You have registered successfully! You may login now!");
+                    window.location.assign("login.php?msg=You have registered successfully, You may login now!");
             </script>';
     } else {
         echo '<div class="alert alert-danger" role="alert">
