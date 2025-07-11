@@ -5,16 +5,17 @@ include("config.php");
 
 if(isset($_GET['id'])){
     $userId = $_GET['id'];
+    $cat_id = $_GET['cat_id'];
 }
 ?>
         <!-- Header Start -->
         <div class="container-fluid bg-breadcrumb">
             <div class="container text-center py-5" style="max-width: 900px;">
-                <h4 class="text-white display-4 mb-4 wow fadeInDown" data-wow-delay="0.1s">Car Catagories</h4>
+                <h4 class="text-white display-4 mb-4 wow fadeInDown" data-wow-delay="0.1s">Our Cars</h4>
                 <ol class="breadcrumb d-flex justify-content-center mb-0 wow fadeInDown" data-wow-delay="0.3s">
                     <li class="breadcrumb-item"><a href="index.php">Home</a></li>
                     <li class="breadcrumb-item"><a href="#">Pages</a></li>
-                    <li class="breadcrumb-item active text-primary">Categories</li>
+                    <li class="breadcrumb-item active text-primary">Available Cars</li>
                 </ol>    
             </div>
         </div>
@@ -24,22 +25,22 @@ if(isset($_GET['id'])){
         <div class="container-fluid categories py-5">
             <div class="container py-5">
                 <div class="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 800px;">
-                    <h1 class="display-5 text-capitalize mb-3">Vehicle <span class="text-primary">Categories</span></h1>
+                    <h1 class="display-5 text-capitalize mb-3">Available <span class="text-primary">Cars</span></h1>
                     <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut amet nemo expedita asperiores commodi accusantium at cum harum, excepturi, quia tempora cupiditate! Adipisci facilis modi quisquam quia distinctio,
                     </p>
                 </div>
                 <div class="categories-carousel owl-carousel wow fadeInUp" data-wow-delay="0.1s">
                     <?php
-                        $r = mysqli_query($conn, "SELECT * FROM `catagories`");
+                        $r = mysqli_query($conn, "SELECT * FROM `cars` WHERE `cat_id`=$cat_id && `status`='active'");
                         while($row = mysqli_fetch_assoc($r)){
                     ?>
                     <div class="categories-item p-4">
                         <div class="categories-item-inner">
                             <div class="categories-img rounded-top">
-                                <img src="img/car-1.png" class="img-fluid w-100 rounded-top" alt="">
+                                <img src="img/<?php echo $row['image_url']; ?>" class="img-fluid w-100 rounded-top" alt="">
                             </div>
                             <div class="categories-content rounded-bottom p-4">
-                                <h4><?php echo $row['name']; ?></h4>
+                                <h4><?php echo $row['brand']." ".$row['title']."(".$row['model'].")"; ?></h4>
                                 <div class="categories-review mb-4">
                                     <div class="me-3">4.5 Review</div>
                                     <div class="d-flex justify-content-center text-secondary">
@@ -55,7 +56,7 @@ if(isset($_GET['id'])){
                                         <?php echo $row['description']; ?>
                                     </div>
                                 </div>
-                                <a href="availableCars.php?id=<?php echo $userId ?>&cat_id=<?php echo $row['id']; ?>" class="btn btn-primary rounded-pill d-flex justify-content-center py-3">View Available Cars</a>
+                                <a href="bookNow.php?id=<?php echo $userId ?>&car_id=<?php echo $row['id']; ?>" class="btn btn-primary rounded-pill d-flex justify-content-center py-3">Book Now</a>
                             </div>
                         </div>
                     </div>

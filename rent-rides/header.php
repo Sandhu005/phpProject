@@ -64,38 +64,76 @@
     <!-- Topbar End -->
 
     <!-- Navbar & Hero Start -->
-    <div class="container-fluid nav-bar sticky-top px-0 px-lg-4 py-2 py-lg-0">
-        <div class="container">
-            <nav class="navbar navbar-expand-lg navbar-light">
-                <a href="" class="navbar-brand p-0">
-                    <h1 class="display-6 text-primary"><i class="fas fa-car-alt me-3"></i></i>Cental</h1>
-                    <!-- <img src="img/logo.png" alt="Logo"> -->
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-                    <span class="fa fa-bars"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarCollapse">
-                    <div class="navbar-nav mx-auto py-0">
-                        <a href="index.php" class="nav-item nav-link active">Home</a>
-                        <a href="about.php" class="nav-item nav-link">About</a>
-                        <a href="service.php" class="nav-item nav-link">Service</a>
-                        <a href="blog.php" class="nav-item nav-link">Blog</a>
 
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
-                            <div class="dropdown-menu m-0">
-                                <a href="feature.php" class="dropdown-item">Our Feature</a>
-                                <a href="cars.php" class="dropdown-item">Our Cars</a>
-                                <a href="team.php" class="dropdown-item">Our Team</a>
-                                <a href="testimonial.php" class="dropdown-item">Testimonial</a>
-                                <a href="404.php" class="dropdown-item">404 Page</a>
-                            </div>
+    <?php
+    if (isset($_GET['id'])) {
+        $userId = $_GET['id'];
+        include("config.php");
+
+        $r = mysqli_query($conn, "SELECT * FROM `users` WHERE `id`=$userId");
+        $userData = mysqli_fetch_array($r);
+    ?>
+        <div class="container-fluid nav-bar sticky-top px-0 px-lg-4 py-2 py-lg-0">
+            <div class="container">
+                <nav class="navbar navbar-expand-lg navbar-light">
+                    <a href="" class="navbar-brand p-0">
+                        <h1 class="display-6 text-primary">Welcome <?php echo $userData['name']; ?></h1>
+                        <!-- <img src="img/logo.png" alt="Logo"> -->
+                    </a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                        <span class="fa fa-bars"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarCollapse">
+                        <div class="navbar-nav mx-auto py-0">
+                            <a href="index.php?id=<?php echo $userId; ?>" class="nav-item nav-link active">Home</a>
+                            <a href="profile.php?id=<?php echo $userId; ?>" class="nav-item nav-link">Profile</a>
+                            <a href="cars.php?id=<?php echo $userId; ?>" class="nav-item nav-link">Cars</a>
+                            <a href="trackBooking.php?id=<?php echo $userId; ?>" class="nav-item nav-link">Track Booking</a> 
+                            <a href="feedback.php?id=<?php echo $userId; ?>" class="nav-item nav-link">Feedback</a>
                         </div>
-                        <a href="contact.php" class="nav-item nav-link">Contact</a>
+                        <a href="index.php" class="btn btn-primary rounded-pill py-2 px-4">Logout</a>
                     </div>
-                    <a href="login.php" class="btn btn-primary rounded-pill py-2 px-4">Login Here</a>
-                </div>
-            </nav>
+                </nav>
+            </div>
         </div>
-    </div>
-    <!-- Navbar & Hero End -->
+    <?php
+    } else {
+    ?>
+        <div class="container-fluid nav-bar sticky-top px-0 px-lg-4 py-2 py-lg-0">
+            <div class="container">
+                <nav class="navbar navbar-expand-lg navbar-light">
+                    <a href="" class="navbar-brand p-0">
+                        <h1 class="display-6 text-primary"><i class="fas fa-car-alt me-3"></i></i>Cental</h1>
+                        <!-- <img src="img/logo.png" alt="Logo"> -->
+                    </a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                        <span class="fa fa-bars"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarCollapse">
+                        <div class="navbar-nav mx-auto py-0">
+                            <a href="index.php" class="nav-item nav-link active">Home</a>
+                            <a href="about.php" class="nav-item nav-link">About</a>
+                            <a href="service.php" class="nav-item nav-link">Service</a>
+                            <a href="blog.php" class="nav-item nav-link">Blog</a>
+
+                            <div class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
+                                <div class="dropdown-menu m-0">
+                                    <a href="feature.php" class="dropdown-item">Our Feature</a>
+                                    <a href="cars.php" class="dropdown-item">Our Cars</a>
+                                    <a href="team.php" class="dropdown-item">Our Team</a>
+                                    <a href="testimonial.php" class="dropdown-item">Testimonial</a>
+                                    <a href="404.php" class="dropdown-item">404 Page</a>
+                                </div>
+                            </div>
+                            <a href="contact.php" class="nav-item nav-link">Contact</a>
+                        </div>
+                        <a href="login.php" class="btn btn-primary rounded-pill py-2 px-4">Login Here</a>
+                    </div>
+                </nav>
+            </div>
+        </div>
+        <!-- Navbar & Hero End -->
+    <?php
+    }
+    ?>
