@@ -14,7 +14,7 @@ $result2 = mysqli_query($conn, $query2);
 while($row2 = mysqli_fetch_assoc($result2)){
             if($email == $row2['email'] && $pwd == $row2['password']){
                 $flag = 1;
-                $userName = $row2['name'];
+                $id = $row2['id'];
             }
 }
 
@@ -23,7 +23,7 @@ if ($email == $row1['email'] && $pwd == $row1['password']) {
     exit();
 } 
 elseif($flag==1){
-    echo "<script>window.location.assign('index.php?name=".$userName."');</script>";
+    echo "<script>window.location.assign('index.php?id=".$id."');</script>";
     exit();
 }
 else {
