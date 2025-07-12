@@ -1,4 +1,5 @@
 <?php
+session_start();
 include("config.php");
 
 $email = $_POST['email'];
@@ -19,6 +20,7 @@ while($row2 = mysqli_fetch_assoc($result2)){
 }
 
 if ($email == $row1['email'] && $pwd == $row1['password']) {
+    $_SESSION['email'] = $email;
     echo "<script>window.location.assign('adminIndex.php');</script>";
     exit();
 } 
