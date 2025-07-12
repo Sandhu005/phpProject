@@ -94,8 +94,9 @@
     
     if($qf==1){
         echo '<script>
-                window.location.assign("trackBooking.php?id='.$userId.'");
+                window.location.assign("trackBooking.php?id='.$userId.'&car_id='.$car_id.'");
             </script>';
+            mysqli_query($conn, "UPDATE `cars` SET `status`='inactive' WHERE `id` = '$car_id'");
             exit();
     }else{
         echo '<div class="alert alert-danager" role="alert">Failed to book car!</div>';
