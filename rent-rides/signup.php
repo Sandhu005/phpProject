@@ -59,7 +59,7 @@ include("config.php");
 if (isset($_POST['addBtn'])) {
     $name = $_POST['name'];
     $email = $_POST['email'];
-    $password = $_POST['password'];
+    $password = md5($_POST['password']);
     $contact = $_POST['contact'];
     $address = $_POST['address'];
 

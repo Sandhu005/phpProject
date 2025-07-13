@@ -46,7 +46,7 @@ if (isset($_GET['msg'])) {
                                 <td><?php echo $row['rating']; ?></td>
                                 <td><?php echo $row['status']; ?></td>
                                 <td>
-                                    <a href="solveFeeback.php">Solved</a> | <a href="deleteFeeback.php">Delete</a>
+                                    <a href="solveFeedback.php?feedbackId=<?php echo $row['id'] ?>">Solved</a> | <a href="deleteFeedback.php?feedbackId=<?php echo $row['id'] ?>">Delete</a>
                                 </td>
                             </tr>
                         <?php

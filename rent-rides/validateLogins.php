@@ -3,7 +3,7 @@ session_start();
 include("config.php");
 
 $email = $_POST['email'];
-$pwd = $_POST['pwd'];
+$pwd = md5($_POST['pwd']);
 
 $query1 = "SELECT * FROM `admin`";
 $result1 = mysqli_query($conn, $query1);
@@ -20,7 +20,7 @@ while($row2 = mysqli_fetch_assoc($result2)){
 }
 
 if ($email == $row1['email'] && $pwd == $row1['password']) {
-    $_SESSION['id'] = $row1['id'];
+    $_SESSION['adminId'] = $row1['id'];
     echo "<script>window.location.assign('adminIndex.php');</script>";
     exit();
 } 

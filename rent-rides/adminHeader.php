@@ -1,9 +1,10 @@
 <?php
 session_start();
-if(!isset($_SESSION['id'])){
+if(!isset($_SESSION['adminId'])){
     echo '<script>window.location.assign("login.php?msg=Please Login First!");</script>';
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
