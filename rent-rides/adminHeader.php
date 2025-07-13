@@ -1,8 +1,6 @@
 <?php
-
 session_start();
-
-if(!isset($_SESSION['email'])){
+if(!isset($_SESSION['id'])){
     echo '<script>window.location.assign("login.php?msg=Please Login First!");</script>';
 }
 ?>
@@ -80,7 +78,7 @@ if(!isset($_SESSION['email'])){
                             </div>
                             <a href="manageFeedbacks.php" class="nav-item nav-link">Feedbacks</a>
                         </div>
-                        <a href="login.php" class="btn btn-primary rounded-pill py-2 px-4">Logout</a>
+                        <a href="logout.php" class="btn btn-primary rounded-pill py-2 px-4">Logout</a>
                     </div>
                 </nav>
             </div>

@@ -1,11 +1,6 @@
 <!-- Header -->
 <?php
 include("header.php");
-include("config.php");
-
-if(isset($_GET['id'])){
-    $userId = $_GET['id'];
-}
 ?>
         <!-- Header Start -->
         <div class="container-fluid bg-breadcrumb">
@@ -55,7 +50,7 @@ if(isset($_GET['id'])){
                                         <?php echo $row['description']; ?>
                                     </div>
                                 </div>
-                                <a href="availableCars.php?id=<?php echo $userId ?>&cat_id=<?php echo $row['id']; ?>" class="btn btn-primary rounded-pill d-flex justify-content-center py-3">View Available Cars</a>
+                                <a href="availableCars.php?cat_id=<?php echo $row['id']; ?>" class="btn btn-primary rounded-pill d-flex justify-content-center py-3">View Available Cars</a>
                             </div>
                         </div>
                     </div>

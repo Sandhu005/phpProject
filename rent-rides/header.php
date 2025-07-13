@@ -1,7 +1,5 @@
 <?php
-
 session_start();
-
 ?>
 
 <!DOCTYPE html>
@@ -72,8 +70,8 @@ session_start();
     <!-- Navbar & Hero Start -->
 
     <?php
-    if (isset($_GET['id'])) {
-        $userId = $_GET['id'];
+    if (isset($_SESSION['id'])) {
+        $userId = $_SESSION['id'];
         include("config.php");
 
         $r = mysqli_query($conn, "SELECT * FROM `users` WHERE `id`=$userId");
@@ -91,13 +89,13 @@ session_start();
                     </button>
                     <div class="collapse navbar-collapse" id="navbarCollapse">
                         <div class="navbar-nav mx-auto py-0">
-                            <a href="index.php?id=<?php echo $userId; ?>" class="nav-item nav-link active">Home</a>
-                            <a href="profile.php?id=<?php echo $userId; ?>" class="nav-item nav-link">Profile</a>
-                            <a href="cars.php?id=<?php echo $userId; ?>" class="nav-item nav-link">Cars</a>
-                            <a href="trackBooking.php?id=<?php echo $userId; ?>" class="nav-item nav-link">Track Booking</a> 
-                            <a href="feedback.php?id=<?php echo $userId; ?>" class="nav-item nav-link">Feedback</a>
+                            <a href="index.php" class="nav-item nav-link active">Home</a>
+                            <a href="profile.php" class="nav-item nav-link">Profile</a>
+                            <a href="cars.php" class="nav-item nav-link">Cars</a>
+                            <a href="trackBooking.php" class="nav-item nav-link">Track Booking</a> 
+                            <a href="feedback.php" class="nav-item nav-link">Feedback</a>
                         </div>
-                        <a href="index.php" class="btn btn-primary rounded-pill py-2 px-4">Logout</a>
+                        <a href="logout.php" class="btn btn-primary rounded-pill py-2 px-4">Logout</a>
                     </div>
                 </nav>
             </div>

@@ -94,7 +94,7 @@
     
     if($qf==1){
         echo '<script>
-                window.location.assign("trackBooking.php?id='.$userId.'&car_id='.$car_id.'");
+                window.location.assign("trackBooking.php");
             </script>';
             exit();
     }else{
