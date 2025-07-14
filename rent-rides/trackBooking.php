@@ -18,6 +18,11 @@ if (!isset($_SESSION['id'])) {
               
             ?>
             <div class="col-3 my-5 card wow fadeInUp" data-wow-delay="0.1s">
+                <?php 
+                    if(isset($_GET['msg'])){
+                        echo '<div class="alert alert-sucsess" role="alert">'.$_GET['msg'].'</div>';
+                    }
+                    ?>
                 <div class="categories-item p-2 pt-4">
                     <div class="categories-item-inner">
                         <div class="categories-img rounded-top">

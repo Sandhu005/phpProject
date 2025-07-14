@@ -17,7 +17,7 @@ if (isset($_GET['msg'])) {
     <div class="row justify-content-center my-5">
         <div class="col-10">
             <?php
-            $data = mysqli_query($conn, "SELECT * FROM `users`");
+            $data = mysqli_query($conn, "SELECT * FROM `users` WHERE `status`='active'");
             if (mysqli_num_rows($data)>0) {
             ?>
                 <table class="table">
@@ -46,7 +46,7 @@ if (isset($_GET['msg'])) {
                                 <td><?php echo $row['contact']; ?></td>
                                 <td><?php echo $row['address']; ?></td>
                                 <td><?php echo $row['status']; ?></td>
-                                <td><a href="editUser.php?id=<?php echo $row['id']; ?>">Edit</a> | <a href="deleteUser.php?id=<?php echo $row['id']; ?>">Delete</a></td>
+                                <td><a href="deleteUser.php?id=<?php echo $row['id']; ?>">Delete</a></td>
                             </tr>
                         <?php
                             $num++;

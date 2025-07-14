@@ -99,7 +99,7 @@
 
             if ($qf == 1) {
                 echo '<script>
-                window.location.assign("trackBooking.php");
+                window.location.assign("trackBooking.php?msg=Booking request has been sent!");
             </script>';
                 exit();
             } else {

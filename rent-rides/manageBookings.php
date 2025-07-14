@@ -16,7 +16,7 @@ if (isset($_GET['msg'])) {
 <div class="container-fluid">
     <div class="row justify-content-center my-5">
         <?php
-        $data = mysqli_query($conn, "SELECT * FROM `bookings` WHERE `status`='pending'");
+        $data = mysqli_query($conn, "SELECT u.name, c.title, b.* FROM bookings as b JOIN users as u ON b.user_id=u.id JOIN cars as c on b.car_id=c.id WHERE b.status='pending'");
         if (mysqli_num_rows($data) > 0) {
         ?>
             <div class="col-10">
@@ -37,24 +37,17 @@ if (isset($_GET['msg'])) {
                         <?php
                         $num = 1;
                         while ($row = mysqli_fetch_assoc($data)) {
-                            $user_id = $row['user_id'];
-                            $car_id = $row['car_id'];
-                            $data2 = mysqli_query($conn, "SELECT * FROM `users` WHERE `id`='$user_id'");
-                            $data3 = mysqli_query($conn, "SELECT * FROM `cars` WHERE `id`='$car_id'");
-                            $row2 = mysqli_fetch_array($data2);
-                            $row3 = mysqli_fetch_array($data3);
-
                         ?>
                             <tr>
                                 <td scope="row"><?php echo $num; ?></td>
-                                <td><?php echo $row2['name']; ?></td>
-                                <td><?php echo $row3['title']; ?></td>
+                                <td><?php echo $row['name']; ?></td>
+                                <td><?php echo $row['title']; ?></td>
                                 <td><?php echo $row['start_date']; ?></td>
                                 <td><?php echo $row['end_date']; ?></td>
                                 <td><?php echo "$" . $row['total_price']; ?></td>
                                 <td><?php echo $row['status']; ?></td>
                                 <td>
-                                    <a href="approveBooking.php?id=<?php echo $row['id']; ?>&car_id=<?php echo $car_id; ?>">Approve</a> | <a href="rejectBooking.php?id=<?php echo $row['id']; ?>">Reject</a>
+                                    <a href="approveBooking.php?id=<?php echo $row['id']; ?>&car_id=<?php echo $row['car_id']; ?>">Approve</a> | <a href="rejectBooking.php?id=<?php echo $row['id']; ?>">Reject</a>
                                 </td>
                             </tr>
                         <?php

@@ -16,7 +16,7 @@ if (isset($_GET['msg'])) {
 <div class="container-fluid">
     <div class="row justify-content-center my-5">
         <?php
-        $data = mysqli_query($conn, "SELECT * FROM `feedbacks` WHERE `status`='unsolved'");
+        $data = mysqli_query($conn, "SELECT u.name, f.* FROM feedbacks as f JOIN users as u ON f.user_id=u.id WHERE f.status='unsolved'");
         if (mysqli_num_rows($data) > 0) {
         ?>
             <div class="col-10">
@@ -35,13 +35,10 @@ if (isset($_GET['msg'])) {
                         <?php
                         $num = 1;
                         while ($row = mysqli_fetch_assoc($data)) {
-                            $user_id = $row['user_id'];
-                            $data2 = mysqli_query($conn, "SELECT `name` FROM `users` WHERE `id`='$user_id'");
-                            $row2 = mysqli_fetch_array($data2);
                         ?>
                             <tr>
                                 <td scope="row"><?php echo $num; ?></td>
-                                <td><?php echo $row2['name']; ?></td>
+                                <td><?php echo $row['name']; ?></td>
                                 <td><?php echo $row['message']; ?></td>
                                 <td><?php echo $row['rating']; ?></td>
                                 <td><?php echo $row['status']; ?></td>

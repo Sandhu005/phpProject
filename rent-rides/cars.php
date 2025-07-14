@@ -25,6 +25,7 @@ include("header.php");
                 </div>
                 <div class="categories-carousel owl-carousel wow fadeInUp" data-wow-delay="0.1s">
                     <?php
+                        include("config.php");
                         $r = mysqli_query($conn, "SELECT * FROM `catagories`");
                         while($row = mysqli_fetch_assoc($r)){
                     ?>

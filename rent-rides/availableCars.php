@@ -67,7 +67,7 @@ if (!isset($_SESSION['id'])) {
             <?php
                 }
             } else {
-                echo '<div class="col-4 my-5 alert alert-danger" role="alert">No Record Found!</div>';
+                echo '<div class="col-4 text-center my-5 alert alert-danger" role="alert">No Record Found!</div>';
             }
             ?>
         </div>
