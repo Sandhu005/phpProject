@@ -1,11 +1,10 @@
 <!-- header and connection -->
 <?php
-session_start();
+include("header.php");
+
 if (!isset($_SESSION['id'])) {
     echo '<script>window.location.assign("index.php");</script>';
 } else {
-    include("header.php");
-
     $result = mysqli_query($conn, "SELECT `name` FROM `users` WHERE `id`='$userId'");
     $data = mysqli_fetch_array($result);
 ?>

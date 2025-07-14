@@ -1,10 +1,10 @@
 <!-- Header -->
 <?php
-session_start();
+include("header.php");
+
 if (!isset($_SESSION['id'])) {
     echo '<script>window.location.assign("index.php");</script>';
 } else {
-    include("header.php");
 
     if (isset($_GET['cat_id'])) {
         $cat_id = $_GET['cat_id'];
@@ -31,12 +31,12 @@ if (!isset($_SESSION['id'])) {
                 <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut amet nemo expedita asperiores commodi accusantium at cum harum, excepturi, quia tempora cupiditate! Adipisci facilis modi quisquam quia distinctio,
                 </p>
             </div>
-            <div class="categories-carousel owl-carousel wow fadeInUp" data-wow-delay="0.1s">
-                <?php
-                $r = mysqli_query($conn, "SELECT * FROM `cars` WHERE `cat_id`=$cat_id && `status`='active'");
-                if (mysqli_num_rows($r) > 0) {
-                    while ($row = mysqli_fetch_assoc($r)) {
-                ?>
+            <?php
+            $r = mysqli_query($conn, "SELECT * FROM `cars` WHERE `cat_id`=$cat_id && `status`='active'");
+            if (mysqli_num_rows($r) > 0) {
+                while ($row = mysqli_fetch_assoc($r)) {
+            ?>
+                    <div class="categories-carousel owl-carousel wow fadeInUp" data-wow-delay="0.1s">
                         <div class="categories-item p-4">
                             <div class="categories-item-inner">
                                 <div class="categories-img rounded-top">
@@ -63,13 +63,13 @@ if (!isset($_SESSION['id'])) {
                                 </div>
                             </div>
                         </div>
-                <?php
-                    }
-                } else {
-                    echo '<div class="col-4 my-5 alert alert-danger" role="alert">No Record Found!</div>';
+                    </div>
+            <?php
                 }
-                ?>
-            </div>
+            } else {
+                echo '<div class="col-4 my-5 alert alert-danger" role="alert">No Record Found!</div>';
+            }
+            ?>
         </div>
     </div>
     <!-- Car categories End -->
