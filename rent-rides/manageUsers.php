@@ -17,7 +17,7 @@ if (isset($_GET['msg'])) {
     <div class="row justify-content-center my-5">
         <div class="col-10">
             <?php
-            $data = mysqli_query($conn, "SELECT * FROM `users` WHERE `status`='active'");
+            $data = mysqli_query($conn, "SELECT * FROM `users`");
             if (mysqli_num_rows($data)>0) {
             ?>
                 <table class="table">

@@ -11,7 +11,7 @@ $totalBookings = mysqli_num_rows($bookingQuery);
 $carQuery = mysqli_query($conn, "SELECT `status` FROM `cars` WHERE `status`='active'");
 $totalCars = mysqli_num_rows($carQuery);
 
-$userQuery = mysqli_query($conn, "SELECT `status` FROM `users` WHERE `status`='active'");
+$userQuery = mysqli_query($conn, "SELECT `status` FROM `users`");
 $totalUsers = mysqli_num_rows($userQuery);
 ?>
 <div class="container-fluid">

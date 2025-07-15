@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 14, 2025 at 12:09 PM
+-- Generation Time: Jul 15, 2025 at 12:16 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -66,7 +66,8 @@ CREATE TABLE `bookings` (
 
 INSERT INTO `bookings` (`id`, `user_id`, `car_id`, `start_date`, `end_date`, `total_price`, `status`, `created_at`) VALUES
 (6, 1, 6, '2025-07-13', '2025-07-15', 2000, 'Approved', '2025-07-12 04:54:49'),
-(7, 3, 4, '2025-07-13', '2025-07-15', 1400, 'Rejected', '2025-07-12 09:31:03');
+(7, 3, 4, '2025-07-13', '2025-07-15', 1400, 'Rejected', '2025-07-12 09:31:03'),
+(8, 4, 3, '2025-07-15', '2025-07-16', 500, 'pending', '2025-07-14 13:44:24');
 
 -- --------------------------------------------------------
 
@@ -163,9 +164,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `contact`, `address`, `status`, `created_at`) VALUES
-(1, 'Badal', 'badal@gmail.com', '202cb962ac59075b964b07152d234b70', '9815543333', 'Banga', 'active', '2025-07-10 16:14:52'),
-(3, 'Aman', 'aman@gmail.com', '202cb962ac59075b964b07152d234b70', '9815554445', 'Amritsar', 'active', '2025-07-11 09:49:47'),
-(4, 'Ashish', 'ashish@gmail.com', '202cb962ac59075b964b07152d234b70', '9888877777', 'Jalandhar', 'active', '2025-07-11 09:50:49');
+(1, 'Badal', 'badal@gmail.com', '202cb962ac59075b964b07152d234b70', '9815543333', 'Banga', 'inactice', '2025-07-10 16:14:52'),
+(3, 'Aman', 'aman@gmail.com', '202cb962ac59075b964b07152d234b70', '9815554445', 'Amritsar', 'inactice', '2025-07-11 09:49:47'),
+(4, 'Ashish', 'ashish@gmail.com', '202cb962ac59075b964b07152d234b70', '9888877777', 'Jalandhar', 'inactice', '2025-07-11 09:50:49');
 
 --
 -- Indexes for dumped tables
@@ -221,7 +222,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `bookings`
 --
 ALTER TABLE `bookings`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `cars`

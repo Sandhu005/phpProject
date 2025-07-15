@@ -44,7 +44,7 @@ if (isset($_GET['msg'])) {
                                 <td><?php echo $row['brand']; ?></td>
                                 <td><?php echo $row['model']; ?></td>
                                 <td><?php echo "$" . $row['price_per_day']; ?></td>
-                                <td><?php echo $row['image_url']; ?></td>
+                                <td><img src="img/<?php echo $row['image_url']; ?>" alt="" width="100px"></td>
                                 <td><?php echo $row['description']; ?></td>
                                 <td><a href="editCar.php?id=<?php echo $row['id']; ?>">Edit</a> | <a href="deleteCar.php?id=<?php echo $row['id']; ?>">Delete</a></td>
                             </tr>
