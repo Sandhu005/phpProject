@@ -11,7 +11,7 @@ $row = mysqli_fetch_array($result);
  
 if(mysqli_num_rows($result)>0){
     if($row['status']=='active'){
-        $_SESSION['userId'] = $row['id'];
+        $_SESSION['id'] = $row['id'];
         header("location: index.php");
     }else{
         header("location: login.php?msg=Your account has been blocked!");

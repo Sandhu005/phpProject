@@ -5,23 +5,14 @@ include("config.php");
 ?>
 
 <!-- Display Table -->
-
-<!-- Displaying Get msg -->
-<?php
-if (isset($_GET['msg'])) {
-    echo "<div class='alert alert-success' role='alert'>" . $_GET['msg'] . "</div>";
-}
-?>
-
 <div class="container-fluid">
     <div class="row justify-content-center my-5">
         <div class="col-10">
-            <?php
-            $data = mysqli_query($conn, "SELECT * FROM `cars`");
-            if (mysqli_num_rows($data) > 0) {
-            ?>
-                <table class="table">
+           <table class="table">
                     <thead>
+                        <tr>
+                            <td colspan=8><input type="text" oninput="search(this.value)" id="search"></td>
+                        </tr>
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">Title</th>
@@ -33,36 +24,26 @@ if (isset($_GET['msg'])) {
                             <th scope="col">Manage</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <?php
-                        $num = 1;
-                        while ($row = mysqli_fetch_assoc($data)) {
-                        ?>
-                            <tr>
-                                <td scope="row"><?php echo $num; ?></td>
-                                <td><?php echo $row['title']; ?></td>
-                                <td><?php echo $row['brand']; ?></td>
-                                <td><?php echo $row['model']; ?></td>
-                                <td><?php echo "$" . $row['price_per_day']; ?></td>
-                                <td><img src="img/<?php echo $row['image_url']; ?>" alt="" width="100px"></td>
-                                <td><?php echo $row['description']; ?></td>
-                                <td><a href="editCar.php?id=<?php echo $row['id']; ?>">Edit</a> | <a href="deleteCar.php?id=<?php echo $row['id']; ?>">Delete</a></td>
-                            </tr>
-                        <?php
-                            $num++;
-                        }
-                        ?>
+                    <tbody id="data">
+                    
                     </tbody>
                 </table>
-            <?php
-            } else {
-                echo '<div class="col-4 my-5 alert alert-danger" role="alert">No Record Found!</div>';
-            }
-            ?>
         </div>
     </div>
 </div>
 
+<script>
+    function search(){
+        let searchInput = document.getElementById("search").value;
+        let xhr = new XMLHttpRequest();
+            xhr.open("GET", "searchCars.php?search="+searchInput, true);
+        xhr.onload = function(){
+            document.getElementById("search").innerHTML = xhr.this;
+        }
+        xhr.send();
+    }
+    search();
+</script>
 <!-- Footer -->
 <?php
 include("adminFooter.php");

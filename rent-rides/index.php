@@ -198,7 +198,7 @@
  <div class="container-fluid feature py-5">
      <div class="container py-5">
          <div class="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 800px;">
-             <h1 class="display-5 text-capitalize mb-3">Cental <span class="text-primary">Features</span></h1>
+             <h1 class="display-5 text-capitalize mb-3">Rent-rides <span class="text-primary">Features</span></h1>
              <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut amet nemo expedita asperiores commodi accusantium at cum harum, excepturi, quia tempora cupiditate! Adipisci facilis modi quisquam quia distinctio,
              </p>
          </div>
@@ -270,7 +270,7 @@
              <div class="col-xl-6 wow fadeInLeft" data-wow-delay="0.2s">
                  <div class="about-item">
                      <div class="pb-5">
-                         <h1 class="display-5 text-capitalize">Cental <span class="text-primary">About</span></h1>
+                         <h1 class="display-5 text-capitalize">Rent-rides <span class="text-primary">About</span></h1>
                          <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut amet nemo expedita asperiores commodi accusantium at cum harum, excepturi, quia tempora cupiditate! Adipisci facilis modi quisquam quia distinctio,
                          </p>
                      </div>
@@ -402,7 +402,7 @@
  <div class="container-fluid service py-5">
      <div class="container py-5">
          <div class="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 800px;">
-             <h1 class="display-5 text-capitalize mb-3">Cental <span class="text-primary">Services</span></h1>
+             <h1 class="display-5 text-capitalize mb-3">Rent-rides <span class="text-primary">Services</span></h1>
              <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut amet nemo expedita asperiores commodi accusantium at cum harum, excepturi, quia tempora cupiditate! Adipisci facilis modi quisquam quia distinctio,
              </p>
          </div>
@@ -660,7 +660,7 @@
  <div class="container-fluid steps py-5">
      <div class="container py-5">
          <div class="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 800px;">
-             <h1 class="display-5 text-capitalize text-white mb-3">Cental<span class="text-primary"> Process</span></h1>
+             <h1 class="display-5 text-capitalize text-white mb-3">Rent-rides<span class="text-primary"> Process</span></h1>
              <p class="mb-0 text-white">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut amet nemo expedita asperiores commodi accusantium at cum harum, excepturi, quia tempora cupiditate! Adipisci facilis modi quisquam quia distinctio,
              </p>
          </div>
@@ -695,7 +695,7 @@
  <div class="container-fluid blog py-5">
      <div class="container py-5">
          <div class="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 800px;">
-             <h1 class="display-5 text-capitalize mb-3">Cental<span class="text-primary"> Blog & News</span></h1>
+             <h1 class="display-5 text-capitalize mb-3">Rent-rides<span class="text-primary"> Blog & News</span></h1>
              <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut amet nemo expedita asperiores commodi accusantium at cum harum, excepturi, quia tempora cupiditate! Adipisci facilis modi quisquam quia distinctio,
              </p>
          </div>
