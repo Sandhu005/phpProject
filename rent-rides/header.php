@@ -7,7 +7,7 @@ session_start();
 
 <head>
     <meta charset="utf-8">
-    <title>Rent-rides - Car Rent Website Template</title>
+    <title>Rent-rides - Car Rent Website</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -117,19 +117,7 @@ session_start();
                         <div class="navbar-nav mx-auto py-0">
                             <a href="index.php" class="nav-item nav-link active">Home</a>
                             <a href="about.php" class="nav-item nav-link">About</a>
-                            <a href="service.php" class="nav-item nav-link">Service</a>
-                            <a href="blog.php" class="nav-item nav-link">Blog</a>
-
-                            <div class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
-                                <div class="dropdown-menu m-0">
-                                    <a href="feature.php" class="dropdown-item">Our Feature</a>
-                                    <a href="cars.php" class="dropdown-item">Our Cars</a>
-                                    <a href="team.php" class="dropdown-item">Our Team</a>
-                                    <a href="testimonial.php" class="dropdown-item">Testimonial</a>
-                                    <a href="404.php" class="dropdown-item">404 Page</a>
-                                </div>
-                            </div>
+                            <a href="cars.php" class="nav-item nav-link">Our Cars</a>
                             <a href="contact.php" class="nav-item nav-link">Contact</a>
                         </div>
                         <a href="login.php" class="btn btn-primary rounded-pill py-2 px-4">Login Here</a>
