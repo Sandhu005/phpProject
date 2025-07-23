@@ -59,7 +59,7 @@ if(!isset($_SESSION['adminId'])){
                     <div class="collapse navbar-collapse" id="navbarCollapse">
                         <div class="navbar-nav mx-auto py-0">
                             <a href="adminIndex.php" class="nav-item nav-link active">Dashboard</a>
-                            <a href="addCatagory.php" class="nav-item nav-link">Catagory</a>
+                            <a href="manageBookings.php" class="nav-item nav-link">Bookings</a>
                             <a href="manageUsers.php" class="nav-item nav-link">Users</a>
 
                             <div class="nav-item dropdown">
@@ -71,10 +71,10 @@ if(!isset($_SESSION['adminId'])){
                             </div>
 
                             <div class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Bookings</a>
+                                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">catagory</a>
                                 <div class="dropdown-menu m-0">
-                                    <a href="manageBookings.php" class="dropdown-item">View Bookings</a>
-                                    <a href="manageBookings.php" class="dropdown-item">Manage Bookings</a>
+                                    <a href="addCatagory.php" class="dropdown-item">Add Catagory</a>
+                                    <a href="manageCatagory.php" class="dropdown-item">Manage Catagory</a>
                                 </div>
                             </div>
                             <a href="manageFeedbacks.php" class="nav-item nav-link">Feedbacks</a>

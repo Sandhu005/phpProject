@@ -10,7 +10,7 @@ include("config.php");
         <div class="col-xl-6 wow fadeInUp" data-wow-delay="0.1s">
             <div class="bg-secondary p-5 rounded">
                 <h4 class="text-primary mb-4">Fill Details to Add Catagory</h4>
-                <form action="" method="post">
+                <form action="" method="post" enctype="multipart/form-data">
                     <div class="row g-4">
                         <div class="col-lg-12 col-xl-12">
                             <div class="form-floating">
@@ -22,6 +22,12 @@ include("config.php");
                             <div class="form-floating">
                                 <input type="text" class="form-control" name="description" id="description" placeholder="Enter Description">
                                 <label for="description">Enter Description</label>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 col-xl-12">
+                            <div class="form-floating">
+                                <input type="file" class="form-control" name="img" id="img">
+                                <label for="img">Upload Image</label>
                             </div>
                         </div>
                         <div class="col-12">
@@ -40,14 +46,19 @@ include("config.php");
 if (isset($_POST['addBtn'])) {
     $name = $_POST['name'];
     $description = $_POST['description'];
+    $img = $_FILES['img'];
+    $imgTmp = $img['tmp_name'];
+    $imgName = $img['name'];
+    $img_url = rand()."-".$imgName;
 
-    $query = "INSERT INTO `catagories`(`name`, `description`) VALUES ('$name', '$description')";
+    $query = "INSERT INTO `catagories`(`name`, `description`, `img_url`) VALUES ('$name', '$description', '$img_url')";
     $result = mysqli_query($conn, $query);
 
     if ($result == 1) {
         echo '<div class="alert alert-success" role="alert">
                 Catagory Added Successfully!
             </div>';
+            move_uploaded_file("$imgTmp", "img/".$img_url);
     } else {
         echo '<div class="alert alert-danger" role="alert">
                 Failed to Add Catagory!
