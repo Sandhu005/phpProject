@@ -76,7 +76,7 @@ $d = mysqli_fetch_assoc($r);
     </div>
 </div>
 
-<!-- Adding to database -->
+<!-- Updating to database -->
 <?php
 
 if (isset($_POST['addBtn'])) {

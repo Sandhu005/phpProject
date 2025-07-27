@@ -14,19 +14,19 @@ include("config.php");
                     <div class="row g-4">
                         <div class="col-lg-12 col-xl-12">
                             <div class="form-floating">
-                                <input type="text" class="form-control" name="name" id="name" placeholder="Catagory Name">
+                                <input type="text" class="form-control" name="name" id="name" placeholder="Catagory Name" required>
                                 <label for="name">Catagory Name</label>
                             </div>
                         </div>
                         <div class="col-lg-12 col-xl-12">
                             <div class="form-floating">
-                                <input type="text" class="form-control" name="description" id="description" placeholder="Enter Description">
+                                <input type="text" class="form-control" name="description" id="description" placeholder="Enter Description" required>
                                 <label for="description">Enter Description</label>
                             </div>
                         </div>
                         <div class="col-lg-12 col-xl-12">
                             <div class="form-floating">
-                                <input type="file" class="form-control" name="img" id="img">
+                                <input type="file" class="form-control" name="img" id="img" required>
                                 <label for="img">Upload Image</label>
                             </div>
                         </div>

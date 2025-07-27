@@ -47,6 +47,8 @@ $totalUsers = mysqli_num_rows($userQuery);
         </div>
     </div>
 </div>
+
+<!-- Footer -->
 <?php
 include("adminFooter.php");
 ?>

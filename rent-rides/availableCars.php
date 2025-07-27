@@ -34,9 +34,11 @@ if (!isset($_SESSION['id'])) {
             <?php
             $r = mysqli_query($conn, "SELECT * FROM `cars` WHERE `cat_id`=$cat_id && `status`='active'");
             if (mysqli_num_rows($r) > 0) {
-                while ($row = mysqli_fetch_assoc($r)) {
             ?>
-                    <div class="categories-carousel owl-carousel wow fadeInUp" data-wow-delay="0.1s">
+                <div class="categories-carousel owl-carousel wow fadeInUp" data-wow-delay="0.1s">
+                    <?php
+                    while ($row = mysqli_fetch_assoc($r)) {
+                    ?>
                         <div class="categories-item p-4">
                             <div class="categories-item-inner">
                                 <div class="categories-img rounded-top">
@@ -63,9 +65,11 @@ if (!isset($_SESSION['id'])) {
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    <?php
+                    }
+                    ?>
+                </div>
             <?php
-                }
             } else {
                 echo '<div class="col-4 text-center my-5 alert alert-danger" role="alert">No Record Found!</div>';
             }

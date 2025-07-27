@@ -44,7 +44,7 @@ $query = mysqli_query($conn, "SELECT * FROM `catagories`");
                                 <td><?php echo $row['description']; ?></td>
                                 <td><img src="<?php echo 'img/'.$row['img_url']; ?>" alt="" width="100px"></td>
                                 <td><?php echo $row['status']; ?></td>
-                                <td><a href="editCatagory.php">Edit</a> | <a href="deleteCatagory.php">Delete</a></td>
+                                <td><a href="editCatagory.php?catId=<?php echo $row['id']; ?>">Edit</a> | <a href="deleteCatagory.php?catId=<?php echo $row['id']; ?>">Delete</a></td>
                         </tr>
 
                         <?php

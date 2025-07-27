@@ -32,7 +32,7 @@ include("header.php");
                     <div class="categories-item p-4">
                         <div class="categories-item-inner">
                             <div class="categories-img rounded-top">
-                                <img src="img/car-1.png" class="img-fluid w-100 rounded-top" alt="">
+                                <img src="img/<?php echo $row['img_url']; ?>" class="img-fluid w-100 rounded-top p-2" alt="">
                             </div>
                             <div class="categories-content rounded-bottom p-4">
                                 <h4><?php echo $row['name']; ?></h4>
