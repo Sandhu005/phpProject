@@ -1,6 +1,9 @@
  <!-- Header -->
  <?php
     include("header.php");
+    include("config.php");
+
+    $query = mysqli_query($conn, "SELECT `id`, `title` FROM `cars`");
     ?>
 
  <!-- Carousel Start -->
@@ -18,16 +21,19 @@
                          <div class="row g-5">
                              <div class="col-lg-6 fadeInLeft animated" data-animation="fadeInLeft" data-delay="1s" style="animation-delay: 1s;">
                                  <div class="bg-secondary rounded p-5">
-                                     <h4 class="text-white mb-4">CONTINUE CAR RESERVATION</h4>
+                                     <h4 class="text-white mb-4">MAKE A CAR RESERVATION</h4>
                                      <form>
                                          <div class="row g-3">
                                              <div class="col-12">
                                                  <select class="form-select" aria-label="Default select example">
-                                                     <option selected>Select Your Car type</option>
-                                                     <option value="1">VW Golf VII</option>
-                                                     <option value="2">Audi A1 S-Line</option>
-                                                     <option value="3">Toyota Camry</option>
-                                                     <option value="4">BMW 320 ModernLine</option>
+                                                     <option selected disabled>Select Your Car type</option>
+                                                     <?php
+                                                        while($row = mysqli_fetch_assoc($query)){
+                                                     ?>
+                                                     <option value="<?php echo $row['id']; ?>"><?php echo $row['title']; ?></option>
+                                                     <?php
+                                                        }
+                                                     ?>
                                                  </select>
                                              </div>
                                              <div class="col-12">
@@ -84,7 +90,7 @@
                                                  </div>
                                              </div>
                                              <div class="col-12">
-                                                 <button class="btn btn-light w-100 py-2">Book Now</button>
+                                                 <a href="<?php if(isset($_SESSION['id'])){ echo "bookNow.php"; }else{ echo "login.php?msg=Please login first!"; } ?>" class="btn btn-light w-100 py-2">Book Now</a>
                                              </div>
                                          </div>
                                      </form>

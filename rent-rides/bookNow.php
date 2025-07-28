@@ -1,16 +1,17 @@
  <!-- Header -->
  <?php
 
-    session_start();
+    include("header.php");
     if (!isset($_SESSION['id'])) {
         echo '<script>window.location.assign("index.php");</script>';
     } else {
-        include("header.php");
         if (isset($_GET['car_id'])) {
             $car_id = $_GET['car_id'];
 
-            $q = mysqli_query($conn, "SELECT * FROM `cars` WHERE `id`=$car_id");
+            $q = mysqli_query($conn, "SELECT `title`, `price_per_day` FROM `cars` WHERE `id`=$car_id");
             $data = mysqli_fetch_array($q);
+        }else{
+            $q2 = mysqli_query($conn, "SELECT `title`, `price_per_day` FROM `cars`");
         }
     ?>
 
@@ -30,7 +31,16 @@
                                              <div class="row g-3">
                                                  <div class="col-12">
                                                      <select class="form-select" aria-label="Default select example" name="car_id">
-                                                         <option value="<?php echo $car_id; ?>" selected><?php echo $data['title']; ?></option>
+                                                        <?php
+                                                        if(isset($_GET['car_id'])){
+                                                            echo '<option value="'.$car_id.'" selected>'.$data['title'].'</option>';
+                                                        }else{
+                                                             echo '<option value="" selected disabled>Select Car</option>';
+                                                            while($row = mysqli_fetch_assoc($q2)){
+                                                                echo '<option value="'.$row['id'].'">'.$row['title'].'</option>';
+                                                            }
+                                                        }
+                                                         ?>
                                                      </select>
                                                  </div>
                                                  <div class="col-12">
@@ -55,7 +65,13 @@
                                                              <span class="fas fa-dollar-sign"></span><span class="ms-1">Price Per Day</span>
                                                          </div>
                                                          <select class="form-control" name="price">
-                                                             <option value="<?php echo $data['price_per_day']; ?>" selected><?php echo $data['price_per_day']; ?></option>
+                                                            <?php
+                                                            if(isset($_GET['car_id'])){
+                                                                echo '<option value="'.$data['price_per_day'].'" selected>'.$data['price_per_day'].'</option>';
+                                                            }else{
+                                                                echo '<option>-</option>';
+                                                            }
+                                                            ?>
                                                          </select>
                                                      </div>
                                                  </div>

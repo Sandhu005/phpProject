@@ -1,15 +1,12 @@
 <!-- Header -->
 <?php
 include("header.php");
-
-if (!isset($_SESSION['id'])) {
-    echo '<script>window.location.assign("index.php");</script>';
-} else {
-
-    if (isset($_GET['cat_id'])) {
-        $cat_id = $_GET['cat_id'];
-    }
+include("config.php");
+if (isset($_GET['cat_id'])) {
+    $cat_id = $_GET['cat_id'];
+}
 ?>
+
     <!-- Header Start -->
     <div class="container-fluid bg-breadcrumb">
         <div class="container text-center py-5" style="max-width: 900px;">
@@ -61,7 +58,7 @@ if (!isset($_SESSION['id'])) {
                                             <?php echo $row['description']; ?>
                                         </div>
                                     </div>
-                                    <a href="bookNow.php?car_id=<?php echo $row['id']; ?>" class="btn btn-primary rounded-pill d-flex justify-content-center py-3">Book Now</a>
+                                    <a href="<?php if(isset($_SESSION['id'])){ echo 'bookNow.php?car_id='.$row['id'];}else{echo 'login.php?msg=Please login first!';}?>" class="btn btn-primary rounded-pill d-flex justify-content-center py-3">Book Now</a>
                                 </div>
                             </div>
                         </div>
@@ -135,5 +132,4 @@ if (!isset($_SESSION['id'])) {
     <!-- Footer -->
 <?php
     include("footer.php");
-}
 ?>
