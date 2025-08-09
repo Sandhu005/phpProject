@@ -84,11 +84,12 @@ include("config.php");
             $flag = 1;
         }
 
-        if (strlen($password) < 8) {
-            $error = "password must be atlest 8 characters!";
+        if (!preg_match("/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?#&_])[A-Za-z\d@$!%*?#&_]{8,}$/", $password)) {
+            $error = "password must be atlest 8 characters and contain capital and small letters and special symbol!";
             $flag = 1;
+        }else{
+            $hashedPassword = md5($password);
         }
-        $hashedPassword = md5($password);
 
         if (strlen($contact) < 10) {
             $error = "Invalid phone number.";
@@ -100,28 +101,22 @@ include("config.php");
             $flag = 1;
         }
 
-        if (!$flag == 1) {
+        if (!($flag === 1)) {
             //Check if email already exists
-            $checkEmail = $conn->prepare("SELECT id FROM users WHERE email = ?");
-            $checkEmail->bind_param("s", $email);
-            $checkEmail->execute();
-            $checkEmail->store_result();
+            $checkEmail = mysqli_query($conn, "SELECT `email` FROM `users` WHERE `email`='$email'");
 
-            // Email exists
-            if ($checkEmail->num_rows > 0) {
-                $error = "This email is already registered.";
-                $checkEmail->close();
-                $conn->close();
+            if (mysqli_num_rows($checkEmail) > 0) {
                 echo '<script>
-                        window.location.assign("signup.php?msg='.$error.'");
+                        window.location.assign("signup.php?msg=Email already registered!")
                     </script>';
+                mysqli_close($conn);
+                exit;
             }
 
             //Insert Into Database
-            $insertStmt = $conn->prepare("INSERT INTO users (name, email, password, contact, address) VALUES (?, ?, ?, ?, ?)");
-            $insertStmt->bind_param("sssss", $name, $email, $hashedPassword, $contact, $address);
-
-            if ($insertStmt->execute()) {
+            $query = mysqli_query($conn, "INSERT INTO `users`(`name`, `email`, `password`, `contact`, `address`) VALUES ('$name','$email','$hashedPassword','$contact','$address')");
+            
+            if ($query == 1) {
                 echo '<script>
                  window.location.assign("login.php?msg=You have registered successfully, You may login now!");
               </script>';
@@ -133,8 +128,9 @@ include("config.php");
               exit;
             }
 
-            $insertStmt->close();
-            $conn->close();
+           mysqli_close($conn);
+           exit;
+
         } else {
             echo '<script>
                 window.location.assign("signup.php?msg='.$error.'");
@@ -158,6 +154,7 @@ include("config.php");
         const addressPattern = /^[a-zA-Z0-9\s,'-]*$/;
         const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         const phonePattern = /^[0-9]{10}$/;
+        const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?#&_])[A-Za-z\d@$!%*?#&_]{8,}$/;
 
         if (!namePattern.test(name)) {
             alert("Name can only contain letters, spaces");
@@ -169,8 +166,8 @@ include("config.php");
             return false;
         }
 
-        if (password.length < 8) {
-            alert("Password must be at least 8 characters long.");
+        if (!passwordPattern.test(password)) {
+            alert("Password must be at least 8 characters and nust contain capital letter, small letter and special symbols.");
             return false;
         }
 

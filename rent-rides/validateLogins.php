@@ -20,6 +20,6 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             header("location: login.php?msg=Your account has been blocked!");
         }
     } else {
-        header("location: login.php?msg=Invalid Password!");
+        header("location: login.php?msg=Invalid Email or Password!");
     }
 }

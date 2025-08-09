@@ -10,7 +10,7 @@ include("header.php");
             <div class="bg-secondary p-5 rounded">
                 <h4 class="text-primary mb-4">Enter Your Credientials for Login</h4>
                <?php if(isset($_GET['msg'])){
-                    echo "<div class='alert alert-success' role='alert'>".$_GET['msg']."</div>";
+                    echo "<div class='alert alert-danger' role='alert'>".$_GET['msg']."</div>";
                  } ?>
                 <form action="validateLogins.php" method="post">
                     <div class="row g-4">

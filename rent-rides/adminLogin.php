@@ -1,13 +1,6 @@
 <!-- Header -->
 <?php
 include("header.php");
-
-if(isset($_GET['msg'])){
-    echo '<div class="alert alert-success" role="alert">
-            '.$_GET['msg'].'
-        </div>';
-}
-
 ?>
 
 <!-- Login Form -->
@@ -16,6 +9,10 @@ if(isset($_GET['msg'])){
         <div class="col-xl-6 wow fadeInUp" data-wow-delay="0.1s">
             <div class="bg-secondary p-5 rounded">
                 <h4 class="text-primary mb-4">Enter Your Credientials for Login</h4>
+                <?php if (isset($_GET['msg'])) {
+                    echo '<div class="alert alert-danger" role="alert">' . $_GET['msg'] . '</div>';
+                }
+                ?>
                 <form action="adminValidate.php" method="post">
                     <div class="row g-4">
                         <div class="col-lg-12 col-xl-6">

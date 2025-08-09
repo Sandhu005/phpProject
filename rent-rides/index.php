@@ -179,7 +179,7 @@
                                                  </div>
                                              </div>
                                              <div class="col-12">
-                                                 <button class="btn btn-light w-100 py-2">Book Now</button>
+                                                 <a href="<?php if(isset($_SESSION['id'])){ echo "bookNow.php"; }else{ echo "login.php?msg=Please login first!"; } ?>" class="btn btn-light w-100 py-2">Book Now</a>
                                              </div>
                                          </div>
                                      </form>
