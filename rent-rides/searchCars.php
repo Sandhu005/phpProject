@@ -1,4 +1,4 @@
-<!-- Header and Database Connection -->
+<!-- Database Connection -->
 <?php
 include("config.php");
 ?>
