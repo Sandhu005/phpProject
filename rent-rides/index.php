@@ -8,7 +8,7 @@
 
  <!-- Carousel Start -->
  <div class="header-carousel">
-     <div id="carouselId" class="carousel slide" data-bs-ride="carousel" data-bs-interval="false">
+     <div id="carouselId" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
          <ol class="carousel-indicators">
              <li data-bs-target="#carouselId" data-bs-slide-to="0" class="active" aria-current="true" aria-label="First slide"></li>
              <li data-bs-target="#carouselId" data-bs-slide-to="1" aria-label="Second slide"></li>
@@ -562,92 +562,8 @@
  </div>
  <!-- Car Steps End -->
 
- <!-- Blog Start -->
- <div class="container-fluid blog py-5">
-     <div class="container py-5">
-         <div class="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 800px;">
-             <h1 class="display-5 text-capitalize mb-3">Rent-rides<span class="text-primary"> Blog & News</span></h1>
-             <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut amet nemo expedita asperiores commodi accusantium at cum harum, excepturi, quia tempora cupiditate! Adipisci facilis modi quisquam quia distinctio,
-             </p>
-         </div>
-         <div class="row g-4">
-             <div class="col-lg-4 wow fadeInUp" data-wow-delay="0.1s">
-                 <div class="blog-item">
-                     <div class="blog-img">
-                         <img src="img/blog-1.jpg" class="img-fluid rounded-top w-100" alt="Image">
-                     </div>
-                     <div class="blog-content rounded-bottom p-4">
-                         <div class="blog-date">30 Dec 2025</div>
-                         <div class="blog-comment my-3">
-                             <div class="small"><span class="fa fa-user text-primary"></span><span class="ms-2">Martin.C</span></div>
-                             <div class="small"><span class="fa fa-comment-alt text-primary"></span><span class="ms-2">6 Comments</span></div>
-                         </div>
-                         <a href="#" class="h4 d-block mb-3">Rental Cars how to check driving fines?</a>
-                         <p class="mb-3">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eius libero soluta impedit eligendi? Quibusdam, laudantium.</p>
-                         <a href="#" class="">Read More <i class="fa fa-arrow-right"></i></a>
-                     </div>
-                 </div>
-             </div>
-             <div class="col-lg-4 wow fadeInUp" data-wow-delay="0.3s">
-                 <div class="blog-item">
-                     <div class="blog-img">
-                         <img src="img/blog-2.jpg" class="img-fluid rounded-top w-100" alt="Image">
-                     </div>
-                     <div class="blog-content rounded-bottom p-4">
-                         <div class="blog-date">25 Dec 2025</div>
-                         <div class="blog-comment my-3">
-                             <div class="small"><span class="fa fa-user text-primary"></span><span class="ms-2">Martin.C</span></div>
-                             <div class="small"><span class="fa fa-comment-alt text-primary"></span><span class="ms-2">6 Comments</span></div>
-                         </div>
-                         <a href="#" class="h4 d-block mb-3">Rental cost of sport and other cars</a>
-                         <p class="mb-3">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eius libero soluta impedit eligendi? Quibusdam, laudantium.</p>
-                         <a href="#" class="">Read More <i class="fa fa-arrow-right"></i></a>
-                     </div>
-                 </div>
-             </div>
-             <div class="col-lg-4 wow fadeInUp" data-wow-delay="0.5s">
-                 <div class="blog-item">
-                     <div class="blog-img">
-                         <img src="img/blog-3.jpg" class="img-fluid rounded-top w-100" alt="Image">
-                     </div>
-                     <div class="blog-content rounded-bottom p-4">
-                         <div class="blog-date">27 Dec 2025</div>
-                         <div class="blog-comment my-3">
-                             <div class="small"><span class="fa fa-user text-primary"></span><span class="ms-2">Martin.C</span></div>
-                             <div class="small"><span class="fa fa-comment-alt text-primary"></span><span class="ms-2">6 Comments</span></div>
-                         </div>
-                         <a href="#" class="h4 d-block mb-3">Document required for car rental</a>
-                         <p class="mb-3">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eius libero soluta impedit eligendi? Quibusdam, laudantium.</p>
-                         <a href="#" class="">Read More <i class="fa fa-arrow-right"></i></a>
-                     </div>
-                 </div>
-             </div>
-         </div>
-     </div>
- </div>
- <!-- Blog End -->
-
- <!-- Banner Start -->
- <div class="container-fluid banner pb-5 wow zoomInDown" data-wow-delay="0.1s">
-     <div class="container pb-5">
-         <div class="banner-item rounded">
-             <img src="img/banner-1.jpg" class="img-fluid rounded w-100" alt="">
-             <div class="banner-content">
-                 <h2 class="text-primary">Rent Your Car</h2>
-                 <h1 class="text-white">Interested in Renting?</h1>
-                 <p class="text-white">Don't hesitate and send us a message.</p>
-                 <div class="banner-btn">
-                     <a href="#" class="btn btn-secondary rounded-pill py-3 px-4 px-md-5 me-2">WhatchApp</a>
-                     <a href="#" class="btn btn-primary rounded-pill py-3 px-4 px-md-5 ms-2">Contact Us</a>
-                 </div>
-             </div>
-         </div>
-     </div>
- </div>
- <!-- Banner End -->
-
  <!-- Team Start -->
- <div class="container-fluid team pb-5">
+ <div class="container-fluid team py-5">
      <div class="container pb-5">
          <div class="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 800px;">
              <h1 class="display-5 text-capitalize mb-3">Customer<span class="text-primary"> Suport</span> Center</h1>
@@ -727,6 +643,25 @@
      </div>
  </div>
  <!-- Team End -->
+
+ <!-- Banner Start -->
+ <div class="container-fluid banner pb-5 wow zoomInDown" data-wow-delay="0.1s">
+     <div class="container pb-5">
+         <div class="banner-item rounded">
+             <img src="img/banner-1.jpg" class="img-fluid rounded w-100" alt="">
+             <div class="banner-content">
+                 <h2 class="text-primary">Rent Your Car</h2>
+                 <h1 class="text-white">Interested in Renting?</h1>
+                 <p class="text-white">Don't hesitate and send us a message.</p>
+                 <div class="banner-btn">
+                     <a href="tel:+919999988888" class="btn btn-secondary rounded-pill py-3 px-4 px-md-5 me-2">WhatchApp</a>
+                     <a href="contact.php" class="btn btn-primary rounded-pill py-3 px-4 px-md-5 ms-2">Contact Us</a>
+                 </div>
+             </div>
+         </div>
+     </div>
+ </div>
+ <!-- Banner End -->
 
  <!-- Testimonial Start -->
  <div class="container-fluid testimonial pb-5">
