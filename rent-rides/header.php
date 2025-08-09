@@ -81,7 +81,7 @@ session_start();
             <div class="container">
                 <nav class="navbar navbar-expand-lg navbar-light">
                     <a href="" class="navbar-brand p-0">
-                        <h1 class="display-6 text-primary">Welcome <?php echo $userData['name']; ?></h1>
+                        <h1 class="display-6 text-primary"><img src="img/users/<?php echo $userData['profile_pic']; ?>" alt="" class="rounded-circle me-2"><?php echo $userData['name']; ?></h1>
                         <!-- <img src="img/logo.png" alt="Logo"> -->
                     </a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">

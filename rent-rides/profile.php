@@ -19,7 +19,7 @@ if (!isset($_SESSION['id'])) {
                         echo '<div class="alert alert-success" role="alert">' . $_GET['msg'] . '</div>';
                     }
                     ?>
-                    <img class="card-img-top" src="" alt="no profile pic">
+                    <img class="card-img-top" src="<?php echo "img/users/".$data['profile_pic']; ?>" alt="no profile pic">
                     <div class="card-body">
                         <div class="card-title"><?php echo '<h4>' . $data['name'] . '</h4>'; ?></div>
                         <p class="card-text">

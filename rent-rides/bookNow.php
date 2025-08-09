@@ -90,6 +90,7 @@
              </div>
          </div>
 
+         <!-- AJAX FOR FETCHING CAR PRICE ON SELECTION -->
          <script>
              function fetchPrice(carId = "") {
                  var xhr = new XMLHttpRequest();

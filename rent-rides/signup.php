@@ -18,7 +18,7 @@ include("config.php");
                     <?php
                     endif;
                     ?>
-                    <form name="signupForm" action="" method="post" onsubmit="return validateForm()">
+                    <form name="signupForm" action="" method="post" onsubmit="return validateForm()" enctype="multipart/form-data">
                         <div class="row g-4">
                             <div class="col-lg-12 col-xl-6">
                                 <div class="form-floating">
@@ -48,6 +48,12 @@ include("config.php");
                                 <div class="form-floating">
                                     <textarea class="form-control" name="address" placeholder="Enter Your Address" id="address" style="height: 80px" required></textarea>
                                     <label for="address">Address</label>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-floating">
+                                    <input type="file" class="form-control" name="photo" id="photo" accept=".jpg,.jpeg,.png">
+                                    <label for="photo">Upload Profile Pic</label>
                                 </div>
                             </div>
                             <div class="col-12">
@@ -87,11 +93,11 @@ include("config.php");
         if (!preg_match("/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?#&_])[A-Za-z\d@$!%*?#&_]{8,}$/", $password)) {
             $error = "password must be atlest 8 characters and contain capital and small letters and special symbol!";
             $flag = 1;
-        }else{
-            $hashedPassword = md5($password);
+        } else {
+            $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
         }
 
-        if (strlen($contact) < 10) {
+        if (!preg_match("/^[0-9]{10}$/", $contact)) {
             $error = "Invalid phone number.";
             $flag = 1;
         }
@@ -99,6 +105,36 @@ include("config.php");
         if (!preg_match("/^[a-zA-Z\s,'-]*$/", $address)) {
             $error = "Only letters, spaces are allowed in the name.";
             $flag = 1;
+        }
+
+        if (isset($_FILES['photo'])) {
+            $allowedTypes = ['image/jpeg', 'image/png', 'image/jpeg'];
+            $maxSize = 2 * 1024 * 1024; // 2MB max
+
+            $fileTmpPath = $_FILES['photo']['tmp_name'];
+            $fileName = $_FILES['photo']['name'];
+            $fileSize = $_FILES['photo']['size'];
+
+            // Validate MIME
+            $finfo = finfo_open(FILEINFO_MIME_TYPE);
+            $mimeType = finfo_file($finfo, $fileTmpPath);
+            finfo_close($finfo);
+
+            if (!in_array($mimeType, $allowedTypes)) {
+                $error = "Only JPG, JPEG and PNG files are allowed.";
+                $flag = 1;
+            } elseif ($fileSize > $maxSize) {
+                $error = "File size exceeds 2MB limit.";
+                $flag = 1;
+            } else {
+                $newFileName = uniqid() . '-' . $fileName;
+                $destPath = 'img/users/'.$newFileName;
+
+                if (!move_uploaded_file($fileTmpPath, $destPath)) {
+                    $error = "Failed to upload profile picture.";
+                    $flag = 1;
+                }
+            }
         }
 
         if (!($flag === 1)) {
@@ -114,26 +150,25 @@ include("config.php");
             }
 
             //Insert Into Database
-            $query = mysqli_query($conn, "INSERT INTO `users`(`name`, `email`, `password`, `contact`, `address`) VALUES ('$name','$email','$hashedPassword','$contact','$address')");
-            
+            $query = mysqli_query($conn, "INSERT INTO `users`(`name`, `email`, `password`, `contact`, `address`, `profile_pic`) VALUES ('$name','$email','$hashedPassword','$contact','$address', '$newFileName')");
+
             if ($query == 1) {
                 echo '<script>
                  window.location.assign("login.php?msg=You have registered successfully, You may login now!");
               </script>';
-              exit;
+                exit;
             } else {
                 echo '<script>
                  window.location.assign("login.php?msg=Failed to register user!");
               </script>';
-              exit;
+                exit;
             }
 
-           mysqli_close($conn);
-           exit;
-
+            mysqli_close($conn);
+            exit;
         } else {
             echo '<script>
-                window.location.assign("signup.php?msg='.$error.'");
+                window.location.assign("signup.php?msg=' . $error . '");
             </script>';
         }
     }
@@ -142,48 +177,65 @@ include("config.php");
 
     <!-- Form Validation with JS -->
     <script>
-    function validateForm() {
-        const form = document.forms["signupForm"];
-        const email = form["email"].value.trim();
-        const name = form["name"].value.trim();
-        const address = form["address"].value.trim();
-        const password = form["password"].value;
-        const contact = form["contact"].value.trim();
+        function validateForm() {
+            const form = document.forms["signupForm"];
+            const email = form["email"].value.trim();
+            const name = form["name"].value.trim();
+            const address = form["address"].value.trim();
+            const password = form["password"].value;
+            const contact = form["contact"].value.trim();
+            const fileInput = form["photo"];
+            const file = fileInput.files[0];
 
-        const namePattern = /^[a-zA-Z\s]+$/;
-        const addressPattern = /^[a-zA-Z0-9\s,'-]*$/;
-        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        const phonePattern = /^[0-9]{10}$/;
-        const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?#&_])[A-Za-z\d@$!%*?#&_]{8,}$/;
+            const namePattern = /^[a-zA-Z\s]+$/;
+            const addressPattern = /^[a-zA-Z0-9\s,'-]*$/;
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            const phonePattern = /^[0-9]{10}$/;
+            const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?#&_])[A-Za-z\d@$!%*?#&_]{8,}$/;
 
-        if (!namePattern.test(name)) {
-            alert("Name can only contain letters, spaces");
-            return false;
+            if (!namePattern.test(name)) {
+                alert("Name can only contain letters, spaces");
+                return false;
+            }
+
+            if (!emailPattern.test(email)) {
+                alert("Please enter a valid email address.");
+                return false;
+            }
+
+            if (!passwordPattern.test(password)) {
+                alert("Password must be at least 8 characters and nust contain capital letter, small letter and special symbols.");
+                return false;
+            }
+
+            if (!phonePattern.test(contact)) {
+                alert("Please enter a valid phone number (10 digits).");
+                return false;
+            }
+
+            if (!addressPattern.test(address)) {
+                alert("Invalid characters in address!");
+                return false;
+            }
+
+            if (file) {
+                const allowedTypes = ['image/jpeg', 'image/png', 'image/jpeg'];
+                const maxSizeMB = 2;
+
+                if (!allowedTypes.includes(file.type)) {
+                    alert("Only JPG, JPEG and PNG images are allowed.");
+                    return false;
+                }
+
+                if (file.size > maxSizeMB * 1024 * 1024) {
+                    alert("File size must be less than 2MB.");
+                    return false;
+                }
+            }
+
+            return true;
         }
-
-        if (!emailPattern.test(email)) {
-            alert("Please enter a valid email address.");
-            return false;
-        }
-
-        if (!passwordPattern.test(password)) {
-            alert("Password must be at least 8 characters and nust contain capital letter, small letter and special symbols.");
-            return false;
-        }
-
-        if (!phonePattern.test(contact)) {
-            alert("Please enter a valid phone number (10 digits).");
-            return false;
-        }
-
-        if (!addressPattern.test(address)) {
-            alert("Invalid characters in address!");
-            return false;
-        }
-
-        return true;
-    }
-</script>
+    </script>
 
     <!-- Preventing from resubmission -->
     <script>
