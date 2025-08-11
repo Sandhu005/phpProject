@@ -103,7 +103,7 @@ include("config.php");
         }
 
         if (!preg_match("/^[a-zA-Z\s,'-]*$/", $address)) {
-            $error = "Only letters, spaces are allowed in the name.";
+            $error = "Invalid characters in address!";
             $flag = 1;
         }
 

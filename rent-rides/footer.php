@@ -1,4 +1,4 @@
-  <!-- Footer Start -->
+<!-- Footer Start -->
         <div class="container-fluid footer py-5 wow fadeIn" data-wow-delay="0.2s">
             <div class="container py-5">
                 <div class="row g-5">
@@ -17,12 +17,18 @@
                     <div class="col-md-6 col-lg-6 col-xl-3">
                         <div class="footer-item d-flex flex-column">
                             <h4 class="text-white mb-4">Quick Links</h4>
-                            <a href="#"><i class="fas fa-angle-right me-2"></i> About</a>
-                            <a href="#"><i class="fas fa-angle-right me-2"></i> Cars</a>
-                            <a href="#"><i class="fas fa-angle-right me-2"></i> Car Types</a>
-                            <a href="#"><i class="fas fa-angle-right me-2"></i> Team</a>
-                            <a href="#"><i class="fas fa-angle-right me-2"></i> Contact us</a>
-                            <a href="#"><i class="fas fa-angle-right me-2"></i> Terms & Conditions</a>
+                            <a href="index.php"><i class="fas fa-angle-right me-2"></i> Home</a>
+                            <a href="about.php"><i class="fas fa-angle-right me-2"></i> About</a>
+                            <a href="cars.php"><i class="fas fa-angle-right me-2"></i> Cars</a>
+                            <a href="contact.php"><i class="fas fa-angle-right me-2"></i> Contact us</a>
+                            <?php
+                                if(isset($_SESSION['id'])){
+                            ?>
+                            <a href="profile.php"><i class="fas fa-angle-right me-2"></i> Profile</a>
+                            <a href="trackBooking.php"><i class="fas fa-angle-right me-2"></i> Booking Status</a>
+                            <?php
+                                }
+                            ?>
                         </div>
                     </div>
                     <div class="col-md-6 col-lg-6 col-xl-3">
@@ -67,13 +73,10 @@
             <div class="container">
                 <div class="row g-4 align-items-center">
                     <div class="col-md-6 text-center text-md-start mb-md-0">
-                        <span class="text-body"><a href="#" class="border-bottom text-white"><i class="fas fa-copyright text-light me-2"></i>Your Site Name</a>, All right reserved.</span>
+                        <span class="text-body"><a href="index.php" class="border-bottom text-white"><i class="fas fa-copyright text-light me-2"></i>Rent-Rides</a>, All right reserved.</span>
                     </div>
                     <div class="col-md-6 text-center text-md-end text-body">
-                        <!--/*** This template is free as long as you keep the below author’s credit link/attribution link/backlink. ***/-->
-                        <!--/*** If you'd like to use the template without the below author’s credit link/attribution link/backlink, ***/-->
-                        <!--/*** you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". ***/-->
-                        Designed By <a class="border-bottom text-white" href="https://htmlcodex.com">HTML Codex</a> Distributed By <a class="border-bottom text-white" href="https://themewagon.com">ThemeWagon</a>
+                        Designed By <a class="border-bottom text-white" href="https://htmlcodex.com">HTML Codex</a>
                     </div>
                 </div>
             </div>

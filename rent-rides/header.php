@@ -1,5 +1,9 @@
 <?php
 session_start();
+if (isset($_SESSION['id'])) {
+    $userId = $_SESSION['id'];
+    include("config.php");
+}
 ?>
 
 <!DOCTYPE html>
@@ -7,7 +11,7 @@ session_start();
 
 <head>
     <meta charset="utf-8">
-    <title>Rent-rides - Car Rent Website</title>
+    <title>Rent-rides - Car Rental Website</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -68,64 +72,41 @@ session_start();
     <!-- Topbar End -->
 
     <!-- Navbar & Hero Start -->
-
-    <?php
-    if (isset($_SESSION['id'])) {
-        $userId = $_SESSION['id'];
-        include("config.php");
-
-        $r = mysqli_query($conn, "SELECT * FROM `users` WHERE `id`=$userId");
-        $userData = mysqli_fetch_array($r);
-    ?>
-        <div class="container-fluid nav-bar sticky-top px-0 px-lg-4 py-2 py-lg-0">
-            <div class="container">
-                <nav class="navbar navbar-expand-lg navbar-light">
-                    <a href="" class="navbar-brand p-0">
-                        <h1 class="display-6 text-primary"><img src="img/users/<?php echo $userData['profile_pic']; ?>" alt="" class="rounded-circle me-2"><?php echo $userData['name']; ?></h1>
-                        <!-- <img src="img/logo.png" alt="Logo"> -->
-                    </a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-                        <span class="fa fa-bars"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarCollapse">
-                        <div class="navbar-nav mx-auto py-0">
-                            <a href="index.php" class="nav-item nav-link active">Home</a>
-                            <a href="profile.php" class="nav-item nav-link">Profile</a>
-                            <a href="cars.php" class="nav-item nav-link">Cars</a>
-                            <a href="trackBooking.php" class="nav-item nav-link">Track Booking</a> 
-                            <a href="feedback.php" class="nav-item nav-link">Feedback</a>
-                        </div>
-                        <a href="logout.php" class="btn btn-primary rounded-pill py-2 px-4">Logout</a>
+    <div class="container-fluid nav-bar sticky-top px-0 px-lg-4 py-2 py-lg-0">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <a href="index.php" class="navbar-brand p-0">
+                    <h1 class="display-6 text-primary"><i class="fas fa-car-alt me-3"></i></i>RENT-RIDES</h1>
+                    <!-- <img src="img/logo.png" alt="Logo"> -->
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                    <span class="fa fa-bars"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <div class="navbar-nav mx-auto py-0">
+                        <a href="index.php" class="nav-item nav-link active">Home</a>
+                        <a href="about.php" class="nav-item nav-link">About</a>
+                        <a href="cars.php" class="nav-item nav-link">Our Cars</a>
+                        <a href="contact.php" class="nav-item nav-link">Contact</a>
+                        <?php
+                        if (isset($userId)) {
+                            $r = mysqli_query($conn, "SELECT * FROM `users` WHERE `id`=$userId");
+                            $userData = mysqli_fetch_array($r);
+                        ?>
+                            <a href="trackBooking.php" class="nav-item nav-link">Booking Status</a>
                     </div>
-                </nav>
-            </div>
+                    <a href="profile.php" class="navbar-brand"><img src="img/users/<?php echo $userData['profile_pic']; ?>" alt="" class="rounded-circle"></a>
+                    <a href="logout.php" class="btn btn-primary rounded-pill py-2 px-4">Logout</a>
+                <?php
+                        } else {
+                ?>
+                </div>
+                    <a href="login.php" class="btn btn-primary rounded-pill py-2 px-4">Login Here</a>
+                <?php
+                        }
+                ?>
+                </div>
+            </nav>
         </div>
-    <?php
-    } else {
-    ?>
-        <div class="container-fluid nav-bar sticky-top px-0 px-lg-4 py-2 py-lg-0">
-            <div class="container">
-                <nav class="navbar navbar-expand-lg navbar-light">
-                    <a href="" class="navbar-brand p-0">
-                        <h1 class="display-6 text-primary"><i class="fas fa-car-alt me-3"></i></i>RENT-RIDES</h1>
-                        <!-- <img src="img/logo.png" alt="Logo"> -->
-                    </a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-                        <span class="fa fa-bars"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarCollapse">
-                        <div class="navbar-nav mx-auto py-0">
-                            <a href="index.php" class="nav-item nav-link active">Home</a>
-                            <a href="about.php" class="nav-item nav-link">About</a>
-                            <a href="cars.php" class="nav-item nav-link">Our Cars</a>
-                            <a href="contact.php" class="nav-item nav-link">Contact</a>
-                        </div>
-                        <a href="login.php" class="btn btn-primary rounded-pill py-2 px-4">Login Here</a>
-                    </div>
-                </nav>
-            </div>
-        </div>
-        <!-- Navbar & Hero End -->
-    <?php
-    }
-    ?>
+    </div>
+    <!-- Navbar & Hero End -->

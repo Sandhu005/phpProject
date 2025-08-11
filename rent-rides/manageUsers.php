@@ -17,7 +17,7 @@ if (isset($_GET['msg'])) {
     <div class="row justify-content-center my-5">
         <div class="col-10">
             <?php
-            $data = mysqli_query($conn, "SELECT * FROM `users`");
+            $data = mysqli_query($conn, "SELECT `id`, `name`, `email`, `contact`, `address`, `status` FROM `users`");
             if (mysqli_num_rows($data)>0) {
             ?>
                 <table class="table">
@@ -26,7 +26,6 @@ if (isset($_GET['msg'])) {
                             <th scope="col">#</th>
                             <th scope="col">Name</th>
                             <th scope="col">Email</th>
-                            <th scope="col">Password</th>
                             <th scope="col">Contact</th>
                             <th scope="col">Address</th>
                             <th scope="col">Status</th>
@@ -42,11 +41,10 @@ if (isset($_GET['msg'])) {
                                 <td scope="row"><?php echo $num; ?></td>
                                 <td><?php echo $row['name']; ?></td>
                                 <td><?php echo $row['email']; ?></td>
-                                <td><?php echo $row['password']; ?></td>
                                 <td><?php echo $row['contact']; ?></td>
                                 <td><?php echo $row['address']; ?></td>
                                 <td><?php echo $row['status']; ?></td>
-                                <td><a href="deleteUser.php?id=<?php echo $row['id']; ?>">Delete</a></td>
+                                <td><a href="blockUser.php?id=<?php echo $row['id']; ?>">Block User</a></td>
                             </tr>
                         <?php
                             $num++;

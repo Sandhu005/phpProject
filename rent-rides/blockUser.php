@@ -6,7 +6,7 @@ if (!isset($_SESSION['adminId'])) {
     include("config.php");
 
     $id = $_GET['id'];
-    $result = mysqli_query($conn, "UPDATE `users` SET `status`='inactice' WHERE `id`='$id'");
+    $result = mysqli_query($conn, "UPDATE `users` SET `status`='Block' WHERE `id`='$id'");
 
     if ($result == 1) {
         echo "<script>window.location.assign('manageUsers.php?msg=User deleted successfully!');</script>";
