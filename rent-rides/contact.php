@@ -75,6 +75,13 @@ include("header.php");
                 <div class="col-xl-6 wow fadeInUp" data-wow-delay="0.1s">
                     <div class="bg-secondary p-5 rounded">
                         <h4 class="text-primary mb-4">Send Your Message</h4>
+                        <?php
+                            if(isset($_GET['msg'])){
+                                echo '<div class="alert alert-danger" role="alert">'
+                                        .htmlspecialchars($_GET["msg"]).
+                                    '</div>';
+                            }
+                        ?>
                         <form action="" name="contactForm" method="post" onsubmit="return validateForm()">
                             <div class="row g-4">
                                 <div class="col-lg-12 col-xl-6">
@@ -91,7 +98,7 @@ include("header.php");
                                 </div>
                                 <div class="col-lg-12 col-xl-6">
                                     <div class="form-floating">
-                                        <input type="phone" class="form-control" id="phone" name="phone" placeholder="Phone">
+                                        <input type="tel" class="form-control" id="phone" name="phone" placeholder="Phone">
                                         <label for="phone">Your Phone</label>
                                     </div>
                                 </div>
@@ -182,6 +189,9 @@ include("header.php");
     <?php
 
     if (isset($_POST['sendBtn'])) {
+        // Database File
+        include('config.php');
+
         //Senitize User Data
         $firstName = filter_var($_POST['firstName'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         $lastName = filter_var($_POST['lastName'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
@@ -193,12 +203,12 @@ include("header.php");
         $error = null;
 
         //Validations
-        if (!preg_match("/^[a-zA-Z\s]*$/", $firstName)) {
+        if (!preg_match("/^[a-zA-Z\s]+$/", $firstName)) {
             $error = "Only letters, spaces are allowed in the first name.";
             $flag = 1;
         }
 
-        if (!preg_match("/^[a-zA-Z]$/", $lastName)) {
+        if (!preg_match("/^[a-zA-Z]+$/", $lastName)) {
             $error = "Only letters are allowed in the last name.";
             $flag = 1;
         }
@@ -213,12 +223,12 @@ include("header.php");
             $flag = 1;
         }
 
-        if (!preg_match("/^[a-zA-Z\s,'-]*$/", $subject)) {
+        if (!preg_match("/^[a-zA-Z0-9\s,'-]*$/", $subject)) {
             $error = "Invalid characters in subject!";
             $flag = 1;
         }
 
-        if (!preg_match("/^[a-zA-Z\s,'-]*$/", $message)) {
+        if (!preg_match("/^[a-zA-Z0-9\s,'\-\.!]*$/", $message)) {
             $error = "Invalid characters in message!";
             $flag = 1;
         }
@@ -255,16 +265,16 @@ include("header.php");
         function validateForm() {
             const form = document.forms["contactForm"];
             const email = form["email"].value.trim();
-            const firstName = form["firstname"].value.trim();
+            const firstName = form["firstName"].value.trim();
             const lastName = form["lastName"].value.trim();
             const subject = form["subject"].value.trim();
             const phone = form["phone"].value.trim();
             const message = form["message"].value.trim();
 
             const firstNamePattern = /^[a-zA-Z\s]+$/;
-            const lastNamePattern = /^[a-zA-Z]$/;
+            const lastNamePattern = /^[a-zA-Z]+$/;
             const subjectPattern = /^[a-zA-Z0-9\s,'-]*$/;
-            const messagePattern = /^[a-zA-Z0-9\s,'-]*$/;
+            const messagePattern = /^[a-zA-Z0-9\s,'\-\.!]*$/;
             const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             const phonePattern = /^[0-9]{10}$/;
 
@@ -283,7 +293,7 @@ include("header.php");
                 return false;
             }
 
-            if (!phonePattern.test(contact)) {
+            if (!phonePattern.test(phone)) {
                 alert("Please enter a valid phone number (10 digits).");
                 return false;
             }
