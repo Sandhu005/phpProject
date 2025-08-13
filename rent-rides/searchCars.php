@@ -21,7 +21,8 @@ if (mysqli_num_rows($data) > 0) {
             <td><?php echo "$" . $row['price_per_day']; ?></td>
             <td><img src="img/<?php echo $row['image_url']; ?>" alt="" width="100px"></td>
             <td><?php echo $row['description']; ?></td>
-            <td><a href="editCar.php?id=<?php echo $row['id']; ?>">Edit</a> | <a href="deleteCar.php?id=<?php echo $row['id']; ?>">Delete</a></td>
+            <td><a class="btn btn-outline-success" href="editCar.php?carId=<?php echo $row['id']; ?>">Edit</a>
+            <a class="btn btn-outline-primary" href="delete.php?carId=<?php echo $row['id']; ?>">Delete</a></td>
         </tr>
 <?php
         $num++;

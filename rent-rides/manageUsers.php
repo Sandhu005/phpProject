@@ -44,7 +44,7 @@ if (isset($_GET['msg'])) {
                                 <td><?php echo $row['contact']; ?></td>
                                 <td><?php echo $row['address']; ?></td>
                                 <td><?php echo $row['status']; ?></td>
-                                <td><a href="blockUser.php?id=<?php echo $row['id']; ?>">Block User</a></td>
+                                <td><a class="btn btn-outline-primary" href="delete.php?user_id=<?php echo $row['id']; ?>">Block User</a></td>
                             </tr>
                         <?php
                             $num++;

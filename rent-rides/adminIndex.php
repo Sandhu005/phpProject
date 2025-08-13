@@ -13,6 +13,9 @@ $totalCars = mysqli_num_rows($carQuery);
 
 $userQuery = mysqli_query($conn, "SELECT `status` FROM `users`");
 $totalUsers = mysqli_num_rows($userQuery);
+
+$messageQuery = mysqli_query($conn, "SELECT `status` FROM `messages` WHERE `status`='Pending'");
+$totalMessages = mysqli_num_rows($messageQuery);
 ?>
 <div class="container-fluid">
     <!-- Cards Row-1 -->
@@ -45,9 +48,17 @@ $totalUsers = mysqli_num_rows($userQuery);
             </div>
             <a href="manageUsers.php" class="btn btn-primary">Manage Now</a>
         </div>
-    </div>
-</div>
 
+        <div class="col-lg-2 card text-center pb-3">
+            <div class="card-body">
+                <h5 class="card-title"><?php echo $totalMessages; ?></h5>
+                <p class="card-text">Pending Messages</p>
+            </div>
+            <a href="manageMessages.php" class="btn btn-primary">Manage Now</a>
+        </div>
+    </div>
+
+</div>
 <!-- Footer -->
 <?php
 include("adminFooter.php");

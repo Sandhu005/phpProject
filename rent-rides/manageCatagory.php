@@ -18,8 +18,8 @@ $query = mysqli_query($conn, "SELECT * FROM `catagories`");
                         <!-- Displaying Get msg -->
                         <?php
                         if (isset($_GET['msg'])) {
-                            echo "<tr><td colspan='8'><div class='alert alert-success' role='alert'>" . $_GET['msg'] . 
-                            "</div></td></tr>";
+                            echo "<tr><td colspan='8'><div class='alert alert-success' role='alert'>" . $_GET['msg'] .
+                                "</div></td></tr>";
                         }
                         ?>
                     </tr>
@@ -33,24 +33,26 @@ $query = mysqli_query($conn, "SELECT * FROM `catagories`");
                     </tr>
                 </thead>
                 <tbody>
-                        <?php
-                            $num = 1;
-                            while($row = mysqli_fetch_assoc($query)){
-                        ?>
+                    <?php
+                    $num = 1;
+                    while ($row = mysqli_fetch_assoc($query)) {
+                    ?>
 
                         <tr>
-                                <td><?php echo $num; ?></td>
-                                <td><?php echo $row['name']; ?></td>
-                                <td><?php echo $row['description']; ?></td>
-                                <td><img src="<?php echo 'img/'.$row['img_url']; ?>" alt="" width="100px"></td>
-                                <td><?php echo $row['status']; ?></td>
-                                <td><a href="editCatagory.php?catId=<?php echo $row['id']; ?>">Edit</a> | <a href="deleteCatagory.php?catId=<?php echo $row['id']; ?>">Delete</a></td>
+                            <td><?php echo $num; ?></td>
+                            <td><?php echo $row['name']; ?></td>
+                            <td><?php echo $row['description']; ?></td>
+                            <td><img src="<?php echo 'img/' . $row['img_url']; ?>" alt="" width="100px"></td>
+                            <td><?php echo $row['status']; ?></td>
+                            <td><a class="btn btn-outline-success" href="editCatagory.php?catId=<?php echo $row['id']; ?>">Edit</a>
+                                <a class="btn btn-outline-primary" href="delete.php?catId=<?php echo $row['id']; ?>">Delete</a>
+                            </td>
                         </tr>
 
-                        <?php
-                            $num++;
-                            }
-                        ?>
+                    <?php
+                        $num++;
+                    }
+                    ?>
                 </tbody>
             </table>
         </div>

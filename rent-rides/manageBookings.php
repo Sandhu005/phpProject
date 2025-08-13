@@ -4,8 +4,6 @@ include("adminHeader.php");
 include("config.php");
 ?>
 
-<!-- Display Table -->
-
 <!-- Displaying Get msg -->
 <?php
 if (isset($_GET['msg'])) {
@@ -13,10 +11,12 @@ if (isset($_GET['msg'])) {
 }
 ?>
 
+<!-- Display Table -->
 <div class="container-fluid">
     <div class="row justify-content-center my-5">
+        <!-- Fetching Data -->
         <?php
-        $data = mysqli_query($conn, "SELECT u.name, c.title, b.* FROM bookings as b JOIN users as u ON b.user_id=u.id JOIN cars as c on b.car_id=c.id WHERE b.status='pending'");
+        $data = mysqli_query($conn, "SELECT u.name, c.title, b.* FROM bookings as b JOIN users as u ON b.user_id=u.id JOIN cars as c on b.car_id=c.id ORDER BY b.created_at DESC");
         if (mysqli_num_rows($data) > 0) {
         ?>
             <div class="col-10">
@@ -47,7 +47,16 @@ if (isset($_GET['msg'])) {
                                 <td><?php echo "$" . $row['total_price']; ?></td>
                                 <td><?php echo $row['status']; ?></td>
                                 <td>
-                                    <a href="approveBooking.php?id=<?php echo $row['id']; ?>&car_id=<?php echo $row['car_id']; ?>">Approve</a> | <a href="rejectBooking.php?id=<?php echo $row['id']; ?>">Reject</a>
+                                    <?php
+                                    if($row['status']=='pending'){
+                                        ?>
+                                    <a class="btn btn-outline-success" href="solve.php?booking_id=<?php echo $row['id']; ?>&car_id=<?php echo $row['car_id']; ?>">Approve</a> 
+                                    <a class="btn btn-outline-primary" href="delete.php?booking_id=<?php echo $row['id']; ?>">Reject</a>
+                                    <?php
+                                        }else{
+                                            echo '<em>No Action</em>';
+                                    }
+                                    ?>
                                 </td>
                             </tr>
                         <?php

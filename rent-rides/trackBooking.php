@@ -7,22 +7,16 @@ if (!isset($_SESSION['id'])) {
 }
 ?>
 <div class="container-fluid">
-    <div class="row justify-content-center">
+    <div class="row justify-content-evenly">
             <?php
             $userId = $_SESSION['id'];
-            $r = mysqli_query($conn, "SELECT c.title, c.brand, c.model, c.image_url, b.* FROM cars as c JOIN bookings as b ON c.id=b.car_id WHERE b.user_id=$userId");
-
-            $row = mysqli_fetch_assoc($r);
+            $r = mysqli_query($conn, "SELECT c.title, c.brand, c.model, c.image_url, b.* FROM bookings as b JOIN cars as c ON b.car_id=c.id WHERE b.user_id=$userId");
 
             if (mysqli_num_rows($r)>0) {
-              
+                while($row = mysqli_fetch_assoc($r)){
             ?>
+
             <div class="col-3 my-5 card wow fadeInUp" data-wow-delay="0.1s">
-                <?php 
-                    if(isset($_GET['msg'])){
-                        echo '<div class="alert alert-sucsess" role="alert">'.$_GET['msg'].'</div>';
-                    }
-                    ?>
                 <div class="categories-item p-2 pt-4">
                     <div class="categories-item-inner">
                         <div class="categories-img rounded-top">
@@ -39,12 +33,15 @@ if (!isset($_SESSION['id'])) {
                                     <?php echo "Total Cost - Rs. " . $row['total_price']; ?>
                                 </div>
                             </div>
-                            <div class="btn btn-primary rounded-pill d-flex w-50 mx-auto justify-content-center my-2"><?php echo $row['status']; ?></div>
+                            <div class="row justify-content-center">
+                            <div class="col-5 p-1 border rounded-pill bg-primary text-white"><?php echo $row['status']; ?></div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
                 <?php
+                }
             } else {
                 echo '<div class="col-4 my-5 alert alert-danger" role="alert">No Booking Found!</div>';
             }

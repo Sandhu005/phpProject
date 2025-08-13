@@ -3,8 +3,8 @@
 include("adminHeader.php");
 include("config.php");
 
-$id = $_GET['id'];
-$q = "SELECT `title`, `brand`, `model`, `price_per_day`, `image_url`, `description` FROM `cars` WHERE `id` = '$id'";
+$carId = $_GET['carId'];
+$q = "SELECT `title`, `brand`, `model`, `price_per_day`, `image_url`, `description` FROM `cars` WHERE `id` = '$carId'";
 $r = mysqli_query($conn, $q);
 $d = mysqli_fetch_assoc($r);
 ?>

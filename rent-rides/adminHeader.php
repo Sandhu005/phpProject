@@ -1,7 +1,7 @@
 <?php
 session_start();
 if(!isset($_SESSION['adminId'])){
-    echo '<script>window.location.assign("login.php?msg=Please Login First!");</script>';
+    echo '<script>window.location.assign("index.php");</script>';
 }
 ?>
 
@@ -10,7 +10,7 @@ if(!isset($_SESSION['adminId'])){
 
     <head>
         <meta charset="utf-8">
-        <title>Cental - Car Rent Website Template</title>
+        <title>Cental - Car Rent Website</title>
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
         <meta content="" name="keywords">
         <meta content="" name="description">
@@ -51,7 +51,7 @@ if(!isset($_SESSION['adminId'])){
             <div class="container nav-bar sticky-top px-0 px-lg-4 py-2 py-lg-0">
                 <nav class="navbar navbar-expand-lg navbar-light">
                     <a href="adminIndex.php" class="navbar-brand p-0">
-                        <h1 class="display-6 text-primary">Dashboard</h1>
+                        <h1 class="display-6 text-primary">Rent-Rides</h1>
                     </a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                         <span class="fa fa-bars"></span>
@@ -77,7 +77,14 @@ if(!isset($_SESSION['adminId'])){
                                     <a href="manageCatagory.php" class="dropdown-item">Manage Catagory</a>
                                 </div>
                             </div>
-                            <a href="manageFeedbacks.php" class="nav-item nav-link">Feedbacks</a>
+
+                            <div class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Inbox</a>
+                                <div class="dropdown-menu m-0">
+                                    <a href="manageFeedbacks.php" class="dropdown-item">Feedbacks</a>
+                                    <a href="manageMessages.php" class="dropdown-item">Messages</a>
+                                </div>
+                            </div>
                         </div>
                         <a href="logout.php" class="btn btn-primary rounded-pill py-2 px-4">Logout</a>
                     </div>
