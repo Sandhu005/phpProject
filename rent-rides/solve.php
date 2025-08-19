@@ -35,8 +35,24 @@ if (!isset($_SESSION['adminId'])) {
 
         mysqli_query($conn, "UPDATE `bookings` SET `status`='Approved' WHERE `id` = $bookingId");
         mysqli_query($conn, "UPDATE `cars` SET `status`='inactive' WHERE `id` = '$car_id'");
-        
+
         echo '<script>window.location.assign("manageBookings.php?msg=Booking has been aprroved!")</script>';
+        exit();
+    } elseif (isset($_GET['catId'])) {
+
+        $catId = $_GET['catId'];
+
+        mysqli_query($conn, "UPDATE `catagories` SET `status`='active' WHERE `id` = '$catId'");
+
+        echo '<script>window.location.assign("manageCatagory.php?msg=Category has been unblocked!")</script>';
+        exit();
+    } elseif (isset($_GET['carId'])) {
+
+        $carId = $_GET['carId'];
+
+        mysqli_query($conn, "UPDATE `cars` SET `status`='active' WHERE `id` = '$carId'");
+
+        echo '<script>window.location.assign("manageCars.php?msg=Car has been unblocked!")</script>';
         exit();
     }
 }

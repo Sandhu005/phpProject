@@ -31,7 +31,7 @@ if (!isset($_SESSION['adminId'])) {
 
         $catId = $_GET['catId'];
 
-        $query = mysqli_query($conn, "UPDATE `catagories` SET `status`='inactive' WHERE `id`='$catId'");
+        $query = mysqli_query($conn, "UPDATE `catagories` SET `status`='block' WHERE `id`='$catId'");
 
         if ($query == 1) {
             header("location: manageCatagory.php?msg=Catagory Deleted Successfully!");
@@ -44,7 +44,7 @@ if (!isset($_SESSION['adminId'])) {
 
         $carId = $_GET['carId'];
 
-        $result = mysqli_query($conn, "UPDATE `cars` SET `status`='Block' WHERE `id` = '$carId'");
+        $result = mysqli_query($conn, "UPDATE `cars` SET `status`='block' WHERE `id` = '$carId'");
 
         if ($result == 1) {
             echo "<script>window.location.assign('manageCars.php?msg=Car deleted successfully!');</script>";
@@ -57,7 +57,7 @@ if (!isset($_SESSION['adminId'])) {
 
         $id = $_GET['user_id'];
 
-        $result = mysqli_query($conn, "UPDATE `users` SET `status`='Block' WHERE `id`='$id'");
+        $result = mysqli_query($conn, "UPDATE `users` SET `status`='block' WHERE `id`='$id'");
 
         if ($result == 1) {
             echo "<script>window.location.assign('manageUsers.php?msg=User deleted successfully!');</script>";

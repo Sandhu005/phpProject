@@ -9,7 +9,6 @@ include("header.php");
             <h4 class="text-white display-4 mb-4 wow fadeInDown" data-wow-delay="0.1s">Contact Us</h4>
             <ol class="breadcrumb d-flex justify-content-center mb-0 wow fadeInDown" data-wow-delay="0.3s">
                 <li class="breadcrumb-item"><a href="index.php">Home</a></li>
-                <li class="breadcrumb-item"><a href="#">Pages</a></li>
                 <li class="breadcrumb-item active text-primary">Contact</li>
             </ol>
         </div>
@@ -21,7 +20,6 @@ include("header.php");
         <div class="container py-5">
             <div class="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 800px;">
                 <h1 class="display-5 text-capitalize text-primary mb-3">Contact Us</h1>
-                <p class="mb-0">The contact form is currently inactive. Get a functional and working contact form with Ajax & PHP in a few minutes. Just copy and paste the files, add a little code and you're done. <a class="text-primary fw-bold" href="https://htmlcodex.com/contact-form">Download Now</a>.</p>
             </div>
             <div class="row g-5">
                 <div class="col-12 wow fadeInUp" data-wow-delay="0.1s">

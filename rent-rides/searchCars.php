@@ -12,7 +12,7 @@ if (mysqli_num_rows($data) > 0) {
     while ($row = mysqli_fetch_assoc($data)) {
 ?>
 
-<!-- Display Table -->
+        <!-- Display Table -->
         <tr>
             <td scope="row"><?php echo $num; ?></td>
             <td><?php echo $row['title']; ?></td>
@@ -21,8 +21,22 @@ if (mysqli_num_rows($data) > 0) {
             <td><?php echo "$" . $row['price_per_day']; ?></td>
             <td><img src="img/<?php echo $row['image_url']; ?>" alt="" width="100px"></td>
             <td><?php echo $row['description']; ?></td>
-            <td><a class="btn btn-outline-success" href="editCar.php?carId=<?php echo $row['id']; ?>">Edit</a>
-            <a class="btn btn-outline-primary" href="delete.php?carId=<?php echo $row['id']; ?>">Delete</a></td>
+            <td><?php echo $row['status']; ?></td>
+            <td>
+                <a class="btn btn-outline-success" href="editCar.php?carId=<?php echo $row['id']; ?>">Edit</a>
+                
+                <?php
+                if ($row['status'] == 'active') {
+                ?>
+                    <a class="btn btn-outline-primary" href="delete.php?carId=<?php echo $row['id']; ?>">Delete</a>
+                <?php
+                } else {
+                ?>
+                    <a class="btn btn-outline-primary" href="solve.php?carId=<?php echo $row['id']; ?>">Unblock</a>
+                <?php
+                }
+                ?>
+            </td>
         </tr>
 <?php
         $num++;

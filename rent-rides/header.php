@@ -88,25 +88,24 @@ if (isset($_SESSION['id'])) {
                         <a href="about.php" class="nav-item nav-link">About</a>
                         <a href="cars.php" class="nav-item nav-link">Our Cars</a>
                         <a href="contact.php" class="nav-item nav-link">Contact</a>
-                        <?php
-                        if (isset($userId)) {
-                            $r = mysqli_query($conn, "SELECT * FROM `users` WHERE `id`=$userId");
-                            $userData = mysqli_fetch_array($r);
-                        ?>
-                            <a href="trackBooking.php" class="nav-item nav-link">Booking Status</a>
                     </div>
-                    <a href="profile.php" class="navbar-brand"><img src="img/users/<?php echo $userData['profile_pic']; ?>" alt="" class="rounded-circle"></a>
-                    <a href="logout.php" class="btn btn-primary rounded-pill py-2 px-4">Logout</a>
-                <?php
-                        } else {
-                ?>
+                    <?php
+                    if (isset($userId)) {
+                        $r = mysqli_query($conn, "SELECT * FROM `users` WHERE `id`=$userId");
+                        $userData = mysqli_fetch_array($r);
+                    ?>
+                        <a href="profile.php" class="navbar-brand"><img src="img/users/<?php echo $userData['profile_pic']; ?>" alt="" class="rounded-circle"></a>
+                        <a href="logout.php" class="btn btn-primary rounded-pill py-2 px-4">Logout</a>
+                    <?php
+                    } else {
+                    ?>
                 </div>
-                    <a href="login.php" class="btn btn-primary rounded-pill py-2 px-4">Login Here</a>
-                <?php
-                        }
-                ?>
-                </div>
-            </nav>
+                <a href="login.php" class="btn btn-primary rounded-pill py-2 px-4">Login Here</a>
+            <?php
+                    }
+            ?>
         </div>
+        </nav>
+    </div>
     </div>
     <!-- Navbar & Hero End -->

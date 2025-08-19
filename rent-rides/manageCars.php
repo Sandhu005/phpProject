@@ -30,6 +30,7 @@ include("config.php");
                         <th scope="col">Price/Day</th>
                         <th scope="col">Image</th>
                         <th scope="col">Despription</th>
+                        <th scope="col">Status</th>
                         <th scope="col">Manage</th>
                     </tr>
                 </thead>

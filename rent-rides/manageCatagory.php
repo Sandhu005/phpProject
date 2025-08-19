@@ -45,7 +45,17 @@ $query = mysqli_query($conn, "SELECT * FROM `catagories`");
                             <td><img src="<?php echo 'img/' . $row['img_url']; ?>" alt="" width="100px"></td>
                             <td><?php echo $row['status']; ?></td>
                             <td><a class="btn btn-outline-success" href="editCatagory.php?catId=<?php echo $row['id']; ?>">Edit</a>
-                                <a class="btn btn-outline-primary" href="delete.php?catId=<?php echo $row['id']; ?>">Delete</a>
+                                <?php
+                                if ($row['status'] == 'active') {
+                                ?>
+                                    <a class="btn btn-outline-primary" href="delete.php?catId=<?php echo $row['id']; ?>">Delete</a>
+                                <?php
+                                } else {
+                                ?>
+                                    <a class="btn btn-outline-primary" href="solve.php?catId=<?php echo $row['id']; ?>">Unblock</a>
+                                <?php
+                                }
+                                ?>
                             </td>
                         </tr>
 
