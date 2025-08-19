@@ -15,6 +15,11 @@ $d = mysqli_fetch_assoc($r);
         <div class="col-xl-6 wow fadeInUp" data-wow-delay="0.1s">
             <div class="bg-secondary p-5 rounded">
                 <h4 class="text-primary mb-4">Fill Details to Add Car</h4>
+                <?php
+                    if(isset($_GET['msg'])){
+                        echo '<div class="alert alert-danger" role="alert">'.$_GET['msg'].'</div>';
+                    }
+                ?>
                 <form action="" method="post" enctype="multipart/form-data">
                     <div class="row g-2">
                         <div class="col-lg-12 col-xl-12">
@@ -22,10 +27,10 @@ $d = mysqli_fetch_assoc($r);
                                 <select name="cat_id" id="" class="form-control" required>
                                     <option value="" selected disabled>Select Catagory</option>
                                     <?php
-                                        $data = mysqli_query($conn, "SELECT * FROM `catagories`");
-                                        while($row = mysqli_fetch_assoc($data)){
-                                            echo "<option value='".$row['id']."'>".$row['name']."</option>";
-                                        }
+                                    $data = mysqli_query($conn, "SELECT * FROM `catagories`");
+                                    while ($row = mysqli_fetch_assoc($data)) {
+                                        echo "<option value='" . $row['id'] . "'>" . $row['name'] . "</option>";
+                                    }
                                     ?>
                                 </select>
                             </div>
@@ -80,43 +85,102 @@ $d = mysqli_fetch_assoc($r);
 <?php
 
 if (isset($_POST['addBtn'])) {
+
+    //Senitize User Data
+    $title = filter_var($_POST['title'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+    $brand = filter_var($_POST['brand'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+    $model = preg_replace('/[^0-9]/', '', $_POST['model']);
+    $price = preg_replace('/[^0-9]/', '', $_POST['price_per_day']);
+    $description = filter_var($_POST['description'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     $cat_id = $_POST['cat_id'];
-    $title = $_POST['title'];
-    $brand = $_POST['brand'];
-    $model = $_POST['model'];
-    $price_per_day = $_POST['price_per_day'];
-    $description = $_POST['description'];
+    $flag = 0;
+    $error = null;
 
-    $img = $_FILES['img'];
-    $imgTmp = $img['tmp_name'];
-    $imgName = $img['name'];
-    $image_url = rand()."-".$imgName;
+    //Validations
+    if (!preg_match("/^[a-zA-Z\s]*$/", $title)) {
+        $error = "Only letters, spaces are allowed in the title.";
+        $flag = 1;
+    }
 
+    if (!preg_match("/^[a-zA-Z\s]*$/", $brand)) {
+        $error = "Only letters, spaces are allowed in the brand.";
+        $flag = 1;
+    }
 
-    $query = "UPDATE `cars` SET `cat_id`='$cat_id',`title`='$title',`brand`='$brand',`model`='$model',`price_per_day`='$price_per_day',`image_url`='$image_url',`description`='$description' WHERE `id` = '$id'";
-    $result = mysqli_query($conn, $query);
+    if (!preg_match("/^[0-9]{4}$/", $model)) {
+        $error = "Invalid model year.";
+        $flag = 1;
+    }
 
-    if ($result == 1) {
-        echo '<script>
+    if (!preg_match("/^[0-9]{3}$/", $price)) {
+        $error = "Invalid price amount.";
+        $flag = 1;
+    }
+
+    if (!preg_match("/^[a-zA-Z\s,'-]*$/", $description)) {
+        $error = "Invalid characters in description!";
+        $flag = 1;
+    }
+
+    if (!empty($_FILES['img']['tmp_name'])) {
+        $allowedTypes = ['image/jpeg', 'image/png', 'image/jpeg'];
+        $maxSize = 2 * 1024 * 1024; // 2MB max
+
+        $fileTmpPath = $_FILES['img']['tmp_name'];
+        $fileName = $_FILES['img']['name'];
+        $fileSize = $_FILES['img']['size'];
+
+        // Validate MIME
+        $finfo = finfo_open(FILEINFO_MIME_TYPE);
+        $mimeType = finfo_file($finfo, $fileTmpPath);
+        finfo_close($finfo);
+
+        if (!in_array($mimeType, $allowedTypes)) {
+            $error = "Only JPG, JPEG and PNG files are allowed.";
+            $flag = 1;
+        } elseif ($fileSize > $maxSize) {
+            $error = "File size exceeds 2MB limit.";
+            $flag = 1;
+        } else {
+            $img = uniqid() . '-' . $fileName;
+            $destPath = 'img/' . $img;
+
+            if (!move_uploaded_file($fileTmpPath, $destPath)) {
+                $error = "Failed to upload profile picture.";
+                $flag = 1;
+            }
+        }
+    }
+
+    if (!$flag == 1) {
+        $query = "UPDATE `cars` SET `cat_id`='$cat_id',`title`='$title',`brand`='$brand',`model`='$model',`price_per_day`='$price_per_day',`image_url`='$image_url',`description`='$description' WHERE `id` = '$id'";
+        $result = mysqli_query($conn, $query);
+
+        if ($result == 1) {
+            echo '<script>
                 window.location.assign("manageCars.php?msg=Car Updated Successfully!");
                 </script>';
-            move_uploaded_file("$imgTmp", "img/".$image_url);
             exit();
-    } else {
-        echo '<div class="alert alert-danger" role="alert">
-                Failed to Update Car!
-            </div>';
+        } else {
+            echo '<script>
+                window.location.assign("editCars.php?msg=Failed to Update Car!");
+                </script>';
+        }
+    }else{
+        echo '<script>
+                window.location.assign("editCars.php?msg='.$error.'");
+            </script>';
     }
 }
 
 ?>
 
 <!-- Preventing from resubmission -->
- <script>
-    if(window.history.replaceState){
+<script>
+    if (window.history.replaceState) {
         window.history.replaceState(null, null, window.location.href);
     }
- </script>
+</script>
 
 <!-- Footer -->
 <?php

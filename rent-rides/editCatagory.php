@@ -19,6 +19,11 @@ if (isset($_GET['catId'])) {
         <div class="col-xl-6 wow fadeInUp" data-wow-delay="0.1s">
             <div class="bg-secondary p-5 rounded">
                 <h4 class="text-primary mb-4">Fill Details to Add Catagory</h4>
+                <?php
+                     if(isset($_GET['msg'])){
+                        echo '<div class="alert alert-warning" role="alert">'.$_GET['msg'].'</div>';
+                    }
+                ?>
                 <form action="" method="post" enctype="multipart/form-data">
                     <div class="row g-4">
                         <div class="col-lg-12 col-xl-12">
@@ -63,25 +68,66 @@ if (isset($_GET['catId'])) {
 <?php
 
 if (isset($_POST['addBtn'])) {
-    $name = $_POST['name'];
-    $description = $_POST['description'];
-    $status = $_POST['status'];
+    //Senitize User Data
+    $name = filter_var($_POST['name'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+    $description = filter_var($_POST['description'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+    $flag = 0;
+    $error = null;
 
-    $img = $_FILES['img'];
-    $imgTmp = $img['tmp_name'];
-    $imgName = $img['name'];
-    $img_url = rand() . "-" . $imgName;
+    //Validations
+    if (!preg_match("/^[a-zA-Z\s]*$/", $name)) {
+        $error = "Only letters, spaces are allowed in the title.";
+        $flag = 1;
+    }
 
-    $query = "UPDATE `catagories` SET `name`='$name', `description`='$description', `img_url`='$img_url', `status`='$status' WHERE `id`='$catId'";
-    $result = mysqli_query($conn, $query);
+    if (!preg_match("/^[a-zA-Z\s,'-]*$/", $description)) {
+        $error = "Invalid characters in description!";
+        $flag = 1;
+    }
 
-    if ($result == 1) {
-        move_uploaded_file($imgTmp, "img/" . $img_url);
-        echo '<script>window.location.assign("manageCatagory.php?msg=Catagory Updated Successfully!");</script>';
-        exit();
+    if (!empty($_FILES['img']['tmp_name'])) {
+        $allowedTypes = ['image/jpeg', 'image/png', 'image/jpeg'];
+        $maxSize = 2 * 1024 * 1024; // 2MB max
+
+        $fileTmpPath = $_FILES['img']['tmp_name'];
+        $fileName = $_FILES['img']['name'];
+        $fileSize = $_FILES['img']['size'];
+
+        // Validate MIME
+        $finfo = finfo_open(FILEINFO_MIME_TYPE);
+        $mimeType = finfo_file($finfo, $fileTmpPath);
+        finfo_close($finfo);
+
+        if (!in_array($mimeType, $allowedTypes)) {
+            $error = "Only JPG, JPEG and PNG files are allowed.";
+            $flag = 1;
+        } elseif ($fileSize > $maxSize) {
+            $error = "File size exceeds 2MB limit.";
+            $flag = 1;
+        } else {
+            $img = uniqid() . '-' . $fileName;
+            $destPath = 'img/' . $img;
+
+            if (!move_uploaded_file($fileTmpPath, $destPath)) {
+                $error = "Failed to upload profile picture.";
+                $flag = 1;
+            }
+        }
+    }
+
+    if (!$flag == 1) {
+        $query = "UPDATE `catagories` SET `name`='$name', `description`='$description', `img_url`='$img', `status`='$status' WHERE `id`='$catId'";
+        $result = mysqli_query($conn, $query);
+
+        if ($result == 1) {
+            echo '<script>window.location.assign("manageCatagory.php?msg=Catagory Updated Successfully!");</script>';
+            exit();
+        } else {
+            echo '<script>window.location.assign("manageCatagory.php?msg=Failed to update Category");</script>';
+            exit();
+        }
     } else {
-        echo '<script>window.location.assign("manageCatagory.php?msg=Catagory Updated Successfully!");</script>';
-        exit();
+        echo '<script>window.location.assign("editCatagory.php?msg=' . $error . '");</script>';
     }
 }
 

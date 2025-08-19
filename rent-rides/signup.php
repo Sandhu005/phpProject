@@ -107,7 +107,7 @@ include("config.php");
             $flag = 1;
         }
 
-        if (isset($_FILES['photo'])) {
+        if (!empty($_FILES['photo']['tmp_name'])) {
             $allowedTypes = ['image/jpeg', 'image/png', 'image/jpeg'];
             $maxSize = 2 * 1024 * 1024; // 2MB max
 

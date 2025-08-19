@@ -10,6 +10,11 @@ include("config.php");
         <div class="col-xl-6 wow fadeInUp" data-wow-delay="0.1s">
             <div class="bg-secondary p-5 rounded">
                 <h4 class="text-primary mb-4">Fill Details to Add Catagory</h4>
+                <?php
+                    if(isset($_GET['msg'])){
+                        echo '<div class="alert alert-warning" role="alert">'.$_GET['msg'].'</div>';
+                    }
+                ?>
                 <form action="" method="post" enctype="multipart/form-data">
                     <div class="row g-4">
                         <div class="col-lg-12 col-xl-12">
@@ -44,37 +49,83 @@ include("config.php");
 <?php
 
 if (isset($_POST['addBtn'])) {
-    $name = $_POST['name'];
-    $description = $_POST['description'];
-    $img = $_FILES['img'];
-    $imgTmp = $img['tmp_name'];
-    $imgName = $img['name'];
-    $img_url = rand()."-".$imgName;
+    //Senitize User Data
+    $name = filter_var($_POST['name'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+    $description = filter_var($_POST['description'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+    $flag = 0;
+    $error = null;
 
-    $query = "INSERT INTO `catagories`(`name`, `description`, `img_url`) VALUES ('$name', '$description', '$img_url')";
-    $result = mysqli_query($conn, $query);
-
-    if ($result == 1) {
-        echo '<div class="alert alert-success" role="alert">
-                Catagory Added Successfully!
-            </div>';
-            move_uploaded_file("$imgTmp", "img/".$img_url);
-    } else {
-        echo '<div class="alert alert-danger" role="alert">
-                Failed to Add Catagory!
-            </div>';
+    //Validations
+    if (!preg_match("/^[a-zA-Z\s]*$/", $name)) {
+        $error = "Only letters, spaces are allowed in the title.";
+        $flag = 1;
     }
-mysqli_close($conn);
+
+    if (!preg_match("/^[a-zA-Z\s,'-]*$/", $description)) {
+        $error = "Invalid characters in description!";
+        $flag = 1;
+    }
+
+    if (!empty($_FILES['img']['tmp_name'])) {
+        $allowedTypes = ['image/jpeg', 'image/png', 'image/jpeg'];
+        $maxSize = 2 * 1024 * 1024; // 2MB max
+
+        $fileTmpPath = $_FILES['img']['tmp_name'];
+        $fileName = $_FILES['img']['name'];
+        $fileSize = $_FILES['img']['size'];
+
+        // Validate MIME
+        $finfo = finfo_open(FILEINFO_MIME_TYPE);
+        $mimeType = finfo_file($finfo, $fileTmpPath);
+        finfo_close($finfo);
+
+        if (!in_array($mimeType, $allowedTypes)) {
+            $error = "Only JPG, JPEG and PNG files are allowed.";
+            $flag = 1;
+        } elseif ($fileSize > $maxSize) {
+            $error = "File size exceeds 2MB limit.";
+            $flag = 1;
+        } else {
+            $img = uniqid() . '-' . $fileName;
+            $destPath = 'img/' . $img;
+
+            if (!move_uploaded_file($fileTmpPath, $destPath)) {
+                $error = "Failed to upload profile picture.";
+                $flag = 1;
+            }
+        }
+    }
+
+    if (!$flag == 1) {
+
+        $query = "INSERT INTO `catagories`(`name`, `description`, `img_url`) VALUES ('$name', '$description', '$img')";
+        $result = mysqli_query($conn, $query);
+
+        if ($result == 1) {
+            echo '<script>
+                        window.location.assign("addCatagory.php?msg=Category Added Successfully!");
+                </script>';
+        } else {
+            echo '<script>
+                        window.location.assign("addCatagory.php?msg=Failed to Add Category!");
+                </script>';
+        }
+        mysqli_close($conn);
+    }else{
+        echo '<script>
+                    window.location.assign("addCatagory.php?msg='.$error.'");
+                </script>';
+    }
 }
 
 ?>
 
 <!-- Preventing from resubmission -->
- <script>
-    if(window.history.replaceState){
+<script>
+    if (window.history.replaceState) {
         window.history.replaceState(null, null, window.location.href);
     }
- </script>
+</script>
 
 <!-- Footer -->
 <?php
