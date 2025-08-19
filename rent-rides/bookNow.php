@@ -29,6 +29,11 @@
                                      <div class="col-lg-6 fadeInLeft animated" data-animation="fadeInLeft" data-delay="1s" style="animation-delay: 1s;">
                                          <div class="bg-secondary rounded p-5">
                                              <h4 class="text-white mb-4">CONTINUE CAR RESERVATION</h4>
+                                             <?php
+                                                if (isset($_GET['msg'])) {
+                                                    echo '<div class="alert alert-warning" role="alert">' . $_GET['msg'] . '</div>';
+                                                }
+                                                ?>
                                              <form action="" method="post">
                                                  <div class="row g-3">
                                                      <div class="col-12">
@@ -124,11 +129,13 @@
 
             if ($qf == 1) {
                 echo '<script>
-                window.location.assign("trackBooking.php?msg=Booking request has been sent!");
-            </script>';
+                        window.location.assign("profile.php?msg=Booking request has been sent!");
+                    </script>';
                 exit();
             } else {
-                echo '<div class="alert alert-danager" role="alert">Failed to book car!</div>';
+                echo '<script>
+                        window.location.assign("bookNow.php?msg=Failed to Book Car!");
+                    </script>';
             }
         }
 

@@ -31,6 +31,11 @@ if (!isset($_SESSION['id'])) {
             <div class="col-xl-6 wow fadeInUp" data-wow-delay="0.1s">
                 <div class="bg-secondary p-5 rounded">
                     <h4 class="text-primary mb-4">Share Your Feedback</h4>
+                    <?php
+                    if (isset($_GET['msg'])) {
+                        echo '<div class="alert alert-warning" role="alert">' . $_GET['msg'] . '</div>';
+                    }
+                    ?>
                     <form action="" method="post">
                         <div class="row g-4">
                             <div class="col-lg-12 col-xl-6">
@@ -67,15 +72,40 @@ if (!isset($_SESSION['id'])) {
     <?php
 
     if (isset($_POST['shareBtn'])) {
-        $msg = $_POST['message'];
-        $rating = $_POST['rating'];
+        //Senitize User Data
+        $msg = filter_var($_POST['msg'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $rating = preg_replace('/[^0-5]/', '', $_POST['rating']);
+        $flag = 0;
+        $error = null;
 
-        $query = mysqli_query($conn, "INSERT INTO `feedbacks`(`user_id`, `message`, `rating`) VALUES ('$userId', '$msg', '$rating')");
+        //Validations    
+        if (!preg_match("/^[a-zA-Z\s,'-]*$/", $msg)) {
+            $error = "Invalid characters in message!";
+            $flag = 1;
+        }
 
-        if ($query == 1) {
-            echo '<div class="alert alert-success" role="alert">Feedback Shared Successfully!</div>';
+        if (!preg_match("/^[0-5]{1}$/", $rating)) {
+            $error = "Invalid rating number, You can rate only from 0-5!";
+            $flag = 1;
+        }
+
+        if (!$flag == 1) {
+
+            $query = mysqli_query($conn, "INSERT INTO `feedbacks`(`user_id`, `message`, `rating`) VALUES ('$userId', '$msg', '$rating')");
+
+            if ($query == 1) {
+                echo '<script>
+                       window.location.assign("trackBooking.php?msg=Feedback Shared Successfully!");
+                </script>';
+            } else {
+                echo '<script>
+                       window.location.assign("trackBooking.php?msg=Failed to share feedback!");
+                </script>';
+            }
         } else {
-            echo '<div class="alert alert-danger" role="alert">Failed to share your feedback!</div>';
+            echo '<script>
+                       window.location.assign("feedback.php?msg=' . $error . '");
+                </script>';
         }
     }
     ?>

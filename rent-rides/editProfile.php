@@ -16,6 +16,11 @@ if (!isset($_SESSION['id'])) {
                 <div class="col-xl-6 wow fadeInUp" data-wow-delay="0.1s">
                     <div class="bg-secondary p-5 rounded">
                         <h4 class="text-primary mb-4">Edit Profile</h4>
+                        <?php
+                        if (isset($_GET['msg'])) {
+                            echo '<div class="alert alert-warning" role="alert">' . $_GET['msg'] . '</div>';
+                        }
+                        ?>
                         <form action="" name="profileUpdateForm" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
                             <div class="row g-2">
                                 <div class="col-lg-12 col-xl-12">
@@ -134,13 +139,13 @@ if (!isset($_SESSION['id'])) {
 
                 if ($result == 1) {
                     echo '<script>
-                    window.location.assign("profile.php?msg=User Updated Successfully!");
+                    window.location.assign("profile.php?msg=Profile Updated Successfully!");
                     </script>';
                     exit();
                 } else {
-                    echo '<div class="alert alert-danger" role="alert">
-                            Failed to Update User!
-                        </div>';
+                    echo '<script>
+                        window.location.assign("profile.php?msg=Failed to Update Profile!");
+                    </script>';
                 }
                 mysqli_close($conn);
                 exit;
